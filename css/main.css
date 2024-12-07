@@ -1,0 +1,125 @@
+.page {
+	--content-width: 80ch;
+	--padding: 8px;
+
+	margin-inline: auto;
+	max-width: var(--content-width);
+	padding: var(--padding);
+	text-align: center;
+}
+
+.links-list,
+.controls-row {
+	column-gap: 8px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.links-list {
+	list-style-type: none;
+	padding: 0;
+}
+
+.divider {
+	margin-block: 8px;
+}
+
+.controls-row {
+	align-items: center;
+	row-gap: 16px;
+}
+
+.info-message:not(:empty) {
+	margin-block: 8px;
+}
+
+.row,
+.cell {
+	--border-width-regular: 1px;
+	--border-width-bold: 2px;
+}
+
+.row {
+	border-block: var(--border-width-regular) solid var(--primary-color);
+	display: flex;
+
+	&:not(:last-child) {
+		border-block-end: none;
+	}
+
+	&:nth-child(3n + 1) {
+		border-block-start-width: var(--border-width-bold);
+	}
+
+	&:first-child {
+		&,
+		.cell:last-child {
+			border-start-end-radius: var(--border-radius);
+		}
+
+		&,
+		.cell:first-child {
+			border-start-start-radius: var(--border-radius);
+		}
+	}
+
+	&:last-child {
+		border-block-end-width: var(--border-width-bold);
+
+		&,
+		.cell:last-child {
+			border-end-end-radius: var(--border-radius);
+		}
+
+		&,
+		.cell:first-child {
+			border-end-start-radius: var(--border-radius);
+		}
+	}
+}
+
+.cell {
+	--content-width-current: min(100vw, calc(var(--content-width) - var(--padding) * 2));
+	--row-border-width-total: calc(6 * var(--border-width-regular) + 4 * var(--border-width-bold));
+	--cell-size-total: calc(var(--content-width-current) - var(--row-border-width-total));
+	--cells-in-row: 9;
+	--cell-size: calc(var(--cell-size-total) / var(--cells-in-row));
+	--font-size-coefficient: 0.65;
+
+	aspect-ratio: 1;
+	background-color: var(--secondary-color);
+	border-block: none;
+	border-inline: var(--border-width-regular) solid var(--primary-color);
+	color: var(--primary-color);
+	/* TODO: find a better way to make the font size large enough and responsive. */
+	font-size: calc(var(--cell-size) * var(--font-size-coefficient));
+	line-height: 100%;
+	text-align: center;
+	width: 100%;
+
+	&:not(:last-child) {
+		border-inline-end: none;
+	}
+
+	&:nth-child(3n + 1) {
+		border-inline-start-width: var(--border-width-bold);
+	}
+
+	&:last-child {
+		border-inline-end-width: var(--border-width-bold);
+	}
+}
+
+/* Utilities. */
+
+/* Source: https://www.a11yproject.com/posts/how-to-hide-content */
+.visually-hidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
