@@ -1,22 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html
+	lang="en"
+>
 	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta
+			charset="UTF-8"
+		>
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		>
 
-		<link href="./css/reset.css" rel="stylesheet" type="text/css">
-		<link href="./css/theme.css" rel="stylesheet" type="text/css">
-		<link href="./css/main.css" rel="stylesheet" type="text/css">
+		<link
+			href="./css/reset.css"
+			rel="stylesheet"
+			type="text/css"
+		>
+		<link
+			href="./css/theme.css"
+			rel="stylesheet"
+			type="text/css"
+		>
+		<link
+			href="./css/main.css"
+			rel="stylesheet"
+			type="text/css"
+		>
 
-		<title>Sudoku</title>
+		<title>
+			Sudoku
+		</title>
 	</head>
 
 	<body>
 		<main
 			class="page"
+			tabindex="0"
 		>
 			<header>
-				<h1>Sudoku</h1>
+				<h1>
+					Sudoku
+				</h1>
 
 				<ul
 					class="links-list"
@@ -64,22 +88,22 @@
 							id="difficulty"
 						>
 							<option
-								value="easy"
+								value="EASY"
 							>
 								Easy
 							</option>
 							<option
-								value="medium"
+								value="MEDIUM"
 							>
 								Medium
 							</option>
 							<option
-								value="hard"
+								value="HARD"
 							>
 								Hard
 							</option>
 							<option
-								value="expert"
+								value="EXPERT"
 							>
 								Expert
 							</option>
@@ -96,12 +120,14 @@
 					>
 						<button
 							type="button"
+							onClick="generateNewBoard(event)"
 						>
-							Generate new board
+							Generate board
 						</button>
 
 						<button
 							type="button"
+							onClick="resetBoard(event)"
 						>
 							Reset board
 						</button>
@@ -120,84 +146,101 @@
 					Board
 				</h2>
 
-				<p
-					id="info-message"
-					class="info-message"
-				></p>
-
-				<div>
+				<div
+					id="board"
+					tabindex="-1"
+				>
 					<div
 						class="row"
 					>
+						<!-- `autocomplete="off"` prevents setting some random values when restoring a closed page. -->
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 1 cell 1 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 1 cell 2 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 1 cell 3 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 1 cell 4 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 1 cell 5 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 1 cell 6 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 1 cell 7 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 1 cell 8 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 1 cell 9 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
@@ -207,151 +250,92 @@
 						class="row"
 					>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 2 cell 1 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 2 cell 2 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 2 cell 3 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 2 cell 4 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 2 cell 5 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 2 cell 6 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 2 cell 7 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 2 cell 8 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
-							class="cell"
-							oninput="handleCellInput(event)"
-						/>
-					</div>
-
-					<div
-						class="row"
-					>
-						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
-							class="cell"
-							oninput="handleCellInput(event)"
-						/>
-						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
-							class="cell"
-							oninput="handleCellInput(event)"
-						/>
-						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
-							class="cell"
-							oninput="handleCellInput(event)"
-						/>
-						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
-							class="cell"
-							oninput="handleCellInput(event)"
-						/>
-						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
-							class="cell"
-							oninput="handleCellInput(event)"
-						/>
-						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
-							class="cell"
-							oninput="handleCellInput(event)"
-						/>
-						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
-							class="cell"
-							oninput="handleCellInput(event)"
-						/>
-						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
-							class="cell"
-							oninput="handleCellInput(event)"
-						/>
-						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 2 cell 9 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
@@ -361,151 +345,92 @@
 						class="row"
 					>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 3 cell 1 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 3 cell 2 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 3 cell 3 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 3 cell 4 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 3 cell 5 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 3 cell 6 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 3 cell 7 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 3 cell 8 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
-							class="cell"
-							oninput="handleCellInput(event)"
-						/>
-					</div>
-
-					<div
-						class="row"
-					>
-						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
-							class="cell"
-							oninput="handleCellInput(event)"
-						/>
-						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
-							class="cell"
-							oninput="handleCellInput(event)"
-						/>
-						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
-							class="cell"
-							oninput="handleCellInput(event)"
-						/>
-						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
-							class="cell"
-							oninput="handleCellInput(event)"
-						/>
-						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
-							class="cell"
-							oninput="handleCellInput(event)"
-						/>
-						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
-							class="cell"
-							oninput="handleCellInput(event)"
-						/>
-						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
-							class="cell"
-							oninput="handleCellInput(event)"
-						/>
-						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
-							class="cell"
-							oninput="handleCellInput(event)"
-						/>
-						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 3 cell 9 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
@@ -515,151 +440,92 @@
 						class="row"
 					>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 4 cell 1 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 4 cell 2 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 4 cell 3 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 4 cell 4 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 4 cell 5 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 4 cell 6 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 4 cell 7 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 4 cell 8 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
-							class="cell"
-							oninput="handleCellInput(event)"
-						/>
-					</div>
-
-					<div
-						class="row"
-					>
-						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
-							class="cell"
-							oninput="handleCellInput(event)"
-						/>
-						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
-							class="cell"
-							oninput="handleCellInput(event)"
-						/>
-						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
-							class="cell"
-							oninput="handleCellInput(event)"
-						/>
-						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
-							class="cell"
-							oninput="handleCellInput(event)"
-						/>
-						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
-							class="cell"
-							oninput="handleCellInput(event)"
-						/>
-						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
-							class="cell"
-							oninput="handleCellInput(event)"
-						/>
-						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
-							class="cell"
-							oninput="handleCellInput(event)"
-						/>
-						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
-							class="cell"
-							oninput="handleCellInput(event)"
-						/>
-						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 4 cell 9 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
@@ -669,74 +535,92 @@
 						class="row"
 					>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 5 cell 1 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 5 cell 2 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 5 cell 3 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 5 cell 4 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 5 cell 5 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 5 cell 6 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 5 cell 7 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 5 cell 8 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 5 cell 9 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
@@ -746,74 +630,377 @@
 						class="row"
 					>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 6 cell 1 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 6 cell 2 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 6 cell 3 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 6 cell 4 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 6 cell 5 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 6 cell 6 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 6 cell 7 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 6 cell 8 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
 						<input
-							type="number"
-							min="1"
-							max="9"
-							step="1"
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 6 cell 9 value"
+							autocomplete="off"
+							class="cell"
+							oninput="handleCellInput(event)"
+						/>
+					</div>
+
+					<div
+						class="row"
+					>
+						<input
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 7 cell 1 value"
+							autocomplete="off"
+							class="cell"
+							oninput="handleCellInput(event)"
+						/>
+						<input
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 7 cell 2 value"
+							autocomplete="off"
+							class="cell"
+							oninput="handleCellInput(event)"
+						/>
+						<input
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 7 cell 3 value"
+							autocomplete="off"
+							class="cell"
+							oninput="handleCellInput(event)"
+						/>
+						<input
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 7 cell 4 value"
+							autocomplete="off"
+							class="cell"
+							oninput="handleCellInput(event)"
+						/>
+						<input
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 7 cell 5 value"
+							autocomplete="off"
+							class="cell"
+							oninput="handleCellInput(event)"
+						/>
+						<input
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 7 cell 6 value"
+							autocomplete="off"
+							class="cell"
+							oninput="handleCellInput(event)"
+						/>
+						<input
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 7 cell 7 value"
+							autocomplete="off"
+							class="cell"
+							oninput="handleCellInput(event)"
+						/>
+						<input
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 7 cell 8 value"
+							autocomplete="off"
+							class="cell"
+							oninput="handleCellInput(event)"
+						/>
+						<input
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 7 cell 9 value"
+							autocomplete="off"
+							class="cell"
+							oninput="handleCellInput(event)"
+						/>
+					</div>
+
+					<div
+						class="row"
+					>
+						<input
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 8 cell 1 value"
+							autocomplete="off"
+							class="cell"
+							oninput="handleCellInput(event)"
+						/>
+						<input
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 8 cell 2 value"
+							autocomplete="off"
+							class="cell"
+							oninput="handleCellInput(event)"
+						/>
+						<input
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 8 cell 3 value"
+							autocomplete="off"
+							class="cell"
+							oninput="handleCellInput(event)"
+						/>
+						<input
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 8 cell 4 value"
+							autocomplete="off"
+							class="cell"
+							oninput="handleCellInput(event)"
+						/>
+						<input
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 8 cell 5 value"
+							autocomplete="off"
+							class="cell"
+							oninput="handleCellInput(event)"
+						/>
+						<input
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 8 cell 6 value"
+							autocomplete="off"
+							class="cell"
+							oninput="handleCellInput(event)"
+						/>
+						<input
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 8 cell 7 value"
+							autocomplete="off"
+							class="cell"
+							oninput="handleCellInput(event)"
+						/>
+						<input
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 8 cell 8 value"
+							autocomplete="off"
+							class="cell"
+							oninput="handleCellInput(event)"
+						/>
+						<input
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 8 cell 9 value"
+							autocomplete="off"
+							class="cell"
+							oninput="handleCellInput(event)"
+						/>
+					</div>
+
+					<div
+						class="row"
+					>
+						<input
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 9 cell 1 value"
+							autocomplete="off"
+							class="cell"
+							oninput="handleCellInput(event)"
+						/>
+						<input
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 9 cell 2 value"
+							autocomplete="off"
+							class="cell"
+							oninput="handleCellInput(event)"
+						/>
+						<input
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 9 cell 3 value"
+							autocomplete="off"
+							class="cell"
+							oninput="handleCellInput(event)"
+						/>
+						<input
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 9 cell 4 value"
+							autocomplete="off"
+							class="cell"
+							oninput="handleCellInput(event)"
+						/>
+						<input
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 9 cell 5 value"
+							autocomplete="off"
+							class="cell"
+							oninput="handleCellInput(event)"
+						/>
+						<input
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 9 cell 6 value"
+							autocomplete="off"
+							class="cell"
+							oninput="handleCellInput(event)"
+						/>
+						<input
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 9 cell 7 value"
+							autocomplete="off"
+							class="cell"
+							oninput="handleCellInput(event)"
+						/>
+						<input
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 9 cell 8 value"
+							autocomplete="off"
+							class="cell"
+							oninput="handleCellInput(event)"
+						/>
+						<input
+							type="text"
+							inputmode="numeric"
+							pattern="[1-9]{0,1}"
+							aria-invalid="false"
+							aria-label="Row 9 cell 9 value"
+							autocomplete="off"
 							class="cell"
 							oninput="handleCellInput(event)"
 						/>
@@ -824,6 +1011,7 @@
 
 		<script
 			src="./js/main.js"
+			type="module"
 		></script>
 	</body>
 </html>

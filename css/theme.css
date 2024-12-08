@@ -2,7 +2,6 @@
 	--color-dark: #202124;
 	--color-light: white;
 	--border-radius: 2px;
-
 	--primary-color: var(--color-dark);
 	--secondary-color: var(--color-light);
 }
@@ -32,9 +31,14 @@ select {
 
 a,
 button,
-select {
+select,
+input {
 	color: var(--primary-color);
+}
 
+a,
+button,
+select {
 	&:where(
 		:focus,
 		:hover

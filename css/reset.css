@@ -1,33 +1,33 @@
 /* Inspired by: https://www.joshwcomeau.com/css/custom-css-reset/#the-css-reset-1 */
 
-/* Use a more-intuitive box-sizing model */
+/* Use a more-intuitive box-sizing model. */
 *,
 *::before,
 *::after {
 	box-sizing: border-box;
 }
 
-/* Remove default margin */
+/* Remove default margin. */
 * {
 	margin: 0;
 }
 
 body {
-	/* Add accessible line-height */
+	/* Add accessible line-height. */
 	line-height: 1.5;
 
-	/* Improve text rendering */
+	/* Improve text rendering. */
 	-webkit-font-smoothing: antialiased;
 }
 
-/* Inherit fonts for form controls */
+/* Inherit fonts for form controls. */
 input,
 button,
 select {
 	font: inherit;
 }
 
-/* Avoid text overflows */
+/* Avoid text overflows. */
 p,
 h1,
 h2,
@@ -38,7 +38,7 @@ h6 {
 	overflow-wrap: break-word;
 }
 
-/* Improve line wrapping */
+/* Improve line wrapping. */
 p {
 	text-wrap: pretty;
 }

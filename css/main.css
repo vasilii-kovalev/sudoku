@@ -30,53 +30,10 @@
 	row-gap: 16px;
 }
 
-.info-message:not(:empty) {
-	margin-block: 8px;
-}
-
 .row,
 .cell {
 	--border-width-regular: 1px;
 	--border-width-bold: 2px;
-}
-
-.row {
-	border-block: var(--border-width-regular) solid var(--primary-color);
-	display: flex;
-
-	&:not(:last-child) {
-		border-block-end: none;
-	}
-
-	&:nth-child(3n + 1) {
-		border-block-start-width: var(--border-width-bold);
-	}
-
-	&:first-child {
-		&,
-		.cell:last-child {
-			border-start-end-radius: var(--border-radius);
-		}
-
-		&,
-		.cell:first-child {
-			border-start-start-radius: var(--border-radius);
-		}
-	}
-
-	&:last-child {
-		border-block-end-width: var(--border-width-bold);
-
-		&,
-		.cell:last-child {
-			border-end-end-radius: var(--border-radius);
-		}
-
-		&,
-		.cell:first-child {
-			border-end-start-radius: var(--border-radius);
-		}
-	}
 }
 
 .cell {
@@ -86,14 +43,14 @@
 	--cells-in-row: 9;
 	--cell-size: calc(var(--cell-size-total) / var(--cells-in-row));
 	--font-size-coefficient: 0.65;
+	/* TODO: find a better way to make the font size large enough and responsive. */
+	--font-size: calc(var(--cell-size) * var(--font-size-coefficient));
 
 	aspect-ratio: 1;
 	background-color: var(--secondary-color);
-	border-block: none;
-	border-inline: var(--border-width-regular) solid var(--primary-color);
+	border: var(--border-width-regular) solid var(--primary-color);
 	color: var(--primary-color);
-	/* TODO: find a better way to make the font size large enough and responsive. */
-	font-size: calc(var(--cell-size) * var(--font-size-coefficient));
+	font-size: var(--font-size);
 	line-height: 100%;
 	text-align: center;
 	width: 100%;
@@ -108,6 +65,56 @@
 
 	&:last-child {
 		border-inline-end-width: var(--border-width-bold);
+	}
+
+	&:read-only {
+		background-color: color(from var(--primary-color) srgb r g b / 0.1);
+	}
+}
+
+.cell.highlighted {
+	--background-color: #dc143c;
+
+	background-color: var(--background-color);
+	color: var(--color-light);
+
+	&:read-only {
+		background-color: color(from var(--background-color) srgb r g b / 0.2);
+		color: var(--primary-color);
+	}
+}
+
+.row {
+	display: flex;
+
+	&:not(:last-child) .cell {
+		border-block-end: none;
+	}
+
+	&:nth-child(3n + 1) .cell {
+		border-block-start-width: var(--border-width-bold);
+	}
+
+	&:first-child .cell {
+		&:last-child {
+			border-start-end-radius: var(--border-radius);
+		}
+
+		&:first-child {
+			border-start-start-radius: var(--border-radius);
+		}
+	}
+
+	&:last-child .cell {
+		border-block-end-width: var(--border-width-bold);
+
+		&:last-child {
+			border-end-end-radius: var(--border-radius);
+		}
+
+		&:first-child {
+			border-end-start-radius: var(--border-radius);
+		}
 	}
 }
 
