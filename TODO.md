@@ -7,6 +7,7 @@
 - [ ] Add [Stylelint](https://stylelint.io)
 - [ ] Generate a new board when difficulty changes
   - [ ] Check if it is possible to prevent the change rather than revert the value if user declined the generation of a new board while user changed something on the existing board
+- [ ] Disable buttons, inputs and select on th first page open
 - [ ] Use [Vitest](https://vitest.dev) to write tests for functions and UI
 - [ ] Make it PWA
   - [ ] Check [Vite PWA](https://vite-pwa-org.netlify.app) plugin
