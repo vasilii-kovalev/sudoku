@@ -1,0 +1,5 @@
+{
+	"ignorePaths": ["dist/**", "src/constants.ts", "LICENSE"],
+	"ignoreWords": ["vite"],
+	"version": "0.2"
+}
