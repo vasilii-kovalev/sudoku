@@ -5,11 +5,13 @@
 	"version": "1.0.0",
 	"scripts": {
 		"dev": "vite",
-		"build": "tsc && vite build",
-		"preview": "vite preview",
-		"typecheck": "tsc --noEmit"
+		"prod:build": "tsc && vite build",
+		"prod:preview": "vite preview",
+		"prod:publish": "npm run prod:build && gh-pages -d dist --nojekyll",
+		"types:check": "tsc --noEmit"
 	},
 	"devDependencies": {
+		"gh-pages": "6.3.0",
 		"typescript": "7.0.2",
 		"vite": "8.3.4"
 	},

@@ -1,5 +1,5 @@
 {
-	"ignorePaths": ["dist/**", "src/constants.ts", "LICENSE"],
-	"ignoreWords": ["vite"],
+	"ignorePaths": ["src/constants.ts", "LICENSE"],
+	"ignoreWords": ["nojekyll", "vite"],
 	"version": "0.2"
 }

@@ -25,16 +25,18 @@ npm ci
 npm run dev
 ```
 
-Open the local URL printed by Vite (normally <http://localhost:5173>).
+The development server uses `/` as its base path.
+Open the local URL printed by Vite (normally <http://localhost:5173/>).
 
 ```sh
-npm run typecheck
-npm run build
-npm run preview
+npm run types:check
+npm run prod:build
+npm run prod:preview
 ```
 
-The build runs strict TypeScript 7 checking and Vite bundling. Deploy the generated `dist` directory
-to any static host. `preview` serves the production build locally; it is not a production server.
+The build runs strict TypeScript 7 checking and Vite bundling, with `/sudoku/` as the base path.
+`prod:preview` serves the production build locally at `/sudoku/` (normally <http://localhost:4173/sudoku/>);
+it is not a production server.
 
 Application modules live in `src`, styles in `src/css`, and the page markup in `index.html`.
 Puzzle seeds are grouped by difficulty; generation randomizes their digits and rearranges the
