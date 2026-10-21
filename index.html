@@ -1,112 +1,46 @@
-<!DOCTYPE html>
-<html
-	lang="en"
->
+<!doctype html>
+<html lang="en">
 	<head>
-		<meta
-			charset="UTF-8"
-		>
-		<meta
-			name="viewport"
-			content="width=device-width, initial-scale=1.0"
-		>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-		<link
-			href="./src/css/reset.css"
-			rel="stylesheet"
-			type="text/css"
-		>
-		<link
-			href="./src/css/theme.css"
-			rel="stylesheet"
-			type="text/css"
-		>
-		<link
-			href="./src/css/main.css"
-			rel="stylesheet"
-			type="text/css"
-		>
+		<link href="./src/css/reset.css" rel="stylesheet" type="text/css" />
+		<link href="./src/css/theme.css" rel="stylesheet" type="text/css" />
+		<link href="./src/css/main.css" rel="stylesheet" type="text/css" />
 
-		<title>
-			Sudoku
-		</title>
+		<title>Sudoku</title>
 	</head>
 
 	<body>
-		<main
-			class="page"
-			tabindex="0"
-		>
+		<main class="page" tabindex="0">
 			<header>
-				<h1>
-					Sudoku
-				</h1>
+				<h1>Sudoku</h1>
 
-				<ul
-					class="links-list"
-				>
+				<ul class="links-list">
 					<li>
-						<a
-							href="https://en.wikipedia.org/wiki/Sudoku"
-							target="_blank"
-						>
-							Rules
-						</a>
+						<a href="https://en.wikipedia.org/wiki/Sudoku" target="_blank"> Rules </a>
 					</li>
 
 					<li>
-						<a
-							href="https://github.com/vasilii-kovalev/sudoku"
-							target="_blank"
-						>
-							Source code
-						</a>
+						<a href="https://github.com/vasilii-kovalev/sudoku" target="_blank"> Source code </a>
 					</li>
 				</ul>
 			</header>
 
-			<hr
-				class="divider"
-			/>
+			<hr class="divider" />
 
 			<section>
-				<h2
-					class="visually-hidden"
-				>
-					Controls
-				</h2>
+				<h2 class="visually-hidden">Controls</h2>
 
-				<div
-					class="controls-row"
-				>
-					<label
-						for="difficulty"
-					>
+				<div class="controls-row">
+					<label for="difficulty">
 						Choose difficulty
 
-						<select
-							id="difficulty"
-						>
-							<option
-								value="EASY"
-							>
-								Easy
-							</option>
-							<option
-								value="MEDIUM"
-							>
-								Medium
-							</option>
-							<option
-								value="HARD"
-							>
-								Hard
-							</option>
-							<option
-								value="EXPERT"
-							>
-								Expert
-							</option>
+						<select id="difficulty">
+							<option value="EASY">Easy</option>
+							<option value="MEDIUM">Medium</option>
+							<option value="HARD">Hard</option>
+							<option value="EXPERT">Expert</option>
 						</select>
 					</label>
 
@@ -115,44 +49,21 @@
 						When it happens, the buttons are placed on the same line rather than only the last one is placed there.
 						If the screen is even smaller, the buttons are displayed one under another like if they weren't grouped.
 					-->
-					<div
-						class="controls-row"
-					>
-						<button
-							type="button"
-							id="generate-board"
-						>
-							Generate board
-						</button>
+					<div class="controls-row">
+						<button type="button" id="generate-board">Generate board</button>
 
-						<button
-							type="button"
-							id="reset-board"
-						>
-							Reset board
-						</button>
+						<button type="button" id="reset-board">Reset board</button>
 					</div>
 				</div>
 			</section>
 
-			<hr
-				class="divider"
-			/>
+			<hr class="divider" />
 
 			<section>
-				<h2
-					class="visually-hidden"
-				>
-					Board
-				</h2>
+				<h2 class="visually-hidden">Board</h2>
 
-				<div
-					id="board"
-					tabindex="-1"
-				>
-					<div
-						class="row"
-					>
+				<div id="board" tabindex="-1">
+					<div class="row">
 						<!-- `autocomplete="off"` prevents setting some random values when restoring a closed page. -->
 						<input
 							type="text"
@@ -237,9 +148,7 @@
 						/>
 					</div>
 
-					<div
-						class="row"
-					>
+					<div class="row">
 						<input
 							type="text"
 							inputmode="numeric"
@@ -323,9 +232,7 @@
 						/>
 					</div>
 
-					<div
-						class="row"
-					>
+					<div class="row">
 						<input
 							type="text"
 							inputmode="numeric"
@@ -409,9 +316,7 @@
 						/>
 					</div>
 
-					<div
-						class="row"
-					>
+					<div class="row">
 						<input
 							type="text"
 							inputmode="numeric"
@@ -495,9 +400,7 @@
 						/>
 					</div>
 
-					<div
-						class="row"
-					>
+					<div class="row">
 						<input
 							type="text"
 							inputmode="numeric"
@@ -581,9 +484,7 @@
 						/>
 					</div>
 
-					<div
-						class="row"
-					>
+					<div class="row">
 						<input
 							type="text"
 							inputmode="numeric"
@@ -667,9 +568,7 @@
 						/>
 					</div>
 
-					<div
-						class="row"
-					>
+					<div class="row">
 						<input
 							type="text"
 							inputmode="numeric"
@@ -753,9 +652,7 @@
 						/>
 					</div>
 
-					<div
-						class="row"
-					>
+					<div class="row">
 						<input
 							type="text"
 							inputmode="numeric"
@@ -839,9 +736,7 @@
 						/>
 					</div>
 
-					<div
-						class="row"
-					>
+					<div class="row">
 						<input
 							type="text"
 							inputmode="numeric"
@@ -928,9 +823,6 @@
 			</section>
 		</main>
 
-		<script
-			src="./src/main.ts"
-			type="module"
-		></script>
+		<script src="./src/main.ts" type="module"></script>
 	</body>
 </html>

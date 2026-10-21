@@ -1,17 +1,33 @@
 {
 	"name": "sudoku",
+	"version": "1.0.0",
 	"private": true,
 	"type": "module",
-	"version": "1.0.0",
 	"scripts": {
 		"dev": "vite",
 		"prod:build": "tsc && vite build",
 		"prod:preview": "vite preview",
 		"prod:publish": "npm run prod:build && gh-pages -d dist --nojekyll",
-		"types:check": "tsc --noEmit"
+		"format:check": "oxfmt --check",
+		"format:fix": "oxfmt",
+		"lint:css:check": "stylelint \"**/*.css\" --ignore-path .gitignore",
+		"lint:css:fix": "npm run lint:css:check -- --fix",
+		"lint:markdown:check": "markdownlint \"**/*.md\" --ignore-path .gitignore",
+		"lint:markdown:fix": "npm run lint:markdown:check -- --fix",
+		"lint:spell:check": "cspell . --quiet --no-show-suggestions",
+		"lint:ts:check": "oxlint --ignore-path .gitignore",
+		"lint:ts:fix": "npm run lint:ts:check -- --fix"
 	},
 	"devDependencies": {
+		"cspell": "10.4.0",
 		"gh-pages": "6.3.0",
+		"markdownlint-cli": "0.49.1",
+		"oxfmt": "0.73.0",
+		"oxlint": "1.88.0",
+		"oxlint-tsgolint": "7.0.2004",
+		"stylelint": "17.16.0",
+		"stylelint-config-standard": "40.0.0",
+		"stylelint-order": "8.1.2",
 		"typescript": "7.0.2",
 		"vite": "8.3.4"
 	},

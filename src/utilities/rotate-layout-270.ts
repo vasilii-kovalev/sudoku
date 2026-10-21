@@ -1,8 +1,4 @@
-import {
-	type CellIndex,
-	type Layout,
-	type Row,
-} from "../types";
+import { type CellIndex, type Layout, type Row } from "../types";
 
 /**
  * @example
@@ -14,9 +10,7 @@ import {
  */
 const rotateLayout270 = (layout: Layout): Layout => {
 	// The row is not necessary to be the first. We need any row to get column indices to use in a loop.
-	const [
-		firstRow,
-	] = layout;
+	const [firstRow] = layout;
 
 	return firstRow.map<Row>((_, index) => {
 		/*
@@ -32,6 +26,4 @@ const rotateLayout270 = (layout: Layout): Layout => {
 	});
 };
 
-export {
-	rotateLayout270,
-};
+export { rotateLayout270 };

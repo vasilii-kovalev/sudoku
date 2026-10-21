@@ -6,6 +6,4 @@ const sortRandomly = (): 1 | -1 => {
 	return -1;
 };
 
-export {
-	sortRandomly,
-};
+export { sortRandomly };

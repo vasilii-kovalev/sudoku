@@ -1,13 +1,6 @@
-import {
-	sortRandomly,
-} from "./sort-randomly";
-import {
-	getLayoutBands,
-} from "./get-layout-bands";
-
-import {
-	type Layout,
-} from "../types";
+import { type Layout } from "../types";
+import { getLayoutBands } from "./get-layout-bands";
+import { sortRandomly } from "./sort-randomly";
 
 const shuffleLayoutBands = (layout: Layout): Layout => {
 	const layoutBands = getLayoutBands(layout);
@@ -16,6 +9,4 @@ const shuffleLayoutBands = (layout: Layout): Layout => {
 	return sortedLayoutBands.flat<Array<Layout>>();
 };
 
-export {
-	shuffleLayoutBands,
-};
+export { shuffleLayoutBands };

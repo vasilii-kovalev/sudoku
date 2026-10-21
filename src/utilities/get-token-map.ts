@@ -1,16 +1,12 @@
-import {
-	CELL_VALUES,
-	TOKENS,
-} from "../constants";
-import {
-	sortRandomly,
-} from "./sort-randomly";
+import { CELL_VALUES, TOKENS } from "../constants";
+import { type CellValue, type Token, type TokenMap } from "../types";
+import { sortRandomly } from "./sort-randomly";
 
-import {
-	type CellValue,
-	type Token,
-	type TokenMap,
-} from "../types";
+const isTokenMap = (tokenMap: Record<string, CellValue>): tokenMap is TokenMap => {
+	return TOKENS.every((token) => {
+		return Object.hasOwn(tokenMap, token);
+	});
+};
 
 const getTokenMap = (): TokenMap => {
 	const sortedTokens = TOKENS.toSorted(sortRandomly);
@@ -20,9 +16,13 @@ const getTokenMap = (): TokenMap => {
 		return [token, CELL_VALUES[index]];
 	});
 
-	return Object.fromEntries(tokenEntries) as TokenMap;
+	const tokenMap = Object.fromEntries(tokenEntries);
+
+	if (!isTokenMap(tokenMap)) {
+		throw new Error("Token map is missing one or more tokens.");
+	}
+
+	return tokenMap;
 };
 
-export {
-	getTokenMap,
-};
+export { getTokenMap };

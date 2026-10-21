@@ -1,7 +1,4 @@
-import {
-	type Layout,
-	type Row,
-} from "../types";
+import { type Layout, type Row } from "../types";
 
 const getLayoutBands = (layout: Layout): Array<Array<Row>> => {
 	return [
@@ -11,6 +8,4 @@ const getLayoutBands = (layout: Layout): Array<Array<Row>> => {
 	];
 };
 
-export {
-	getLayoutBands,
-};
+export { getLayoutBands };

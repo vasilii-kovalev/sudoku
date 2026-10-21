@@ -1,7 +1,4 @@
-import {
-	type Layout,
-	type Row,
-} from "../types";
+import { type Layout, type Row } from "../types";
 
 /**
  * @example
@@ -19,6 +16,4 @@ const rotateLayout180 = (layout: Layout): Layout => {
 	return layoutWithReversedColumns.toReversed();
 };
 
-export {
-	rotateLayout180,
-};
+export { rotateLayout180 };

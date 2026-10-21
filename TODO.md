@@ -2,8 +2,9 @@
 
 - [ ] Check impact on performance of different frameworks usage
   - [ ] Try server components to generate static HTML on build time
-- [ ] Add [ESLint](https://eslint.org)
-- [ ] Add [Stylelint](https://stylelint.io)
+- [x] Add [Oxlint](https://oxc.rs/docs/guide/usage/linter)
+- [x] Add [Oxfmt](https://oxc.rs/docs/guide/usage/formatter)
+- [x] Add [Stylelint](https://stylelint.io)
 - [ ] Generate a new board when difficulty changes
   - [ ] Check if it is possible to prevent the change rather than revert the value if user declined the generation of a new board while user changed something on the existing board
 - [ ] Disable buttons, inputs and select on th first page open

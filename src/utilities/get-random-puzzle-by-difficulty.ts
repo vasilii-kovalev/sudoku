@@ -1,14 +1,6 @@
-import {
-	getRandomItem,
-} from "./get-random-item";
-import {
-	getSeedsByDifficulty,
-} from "./get-seeds-by-difficulty";
-
-import {
-	type Difficulty,
-	type Puzzle,
-} from "../types";
+import { type Difficulty, type Puzzle } from "../types";
+import { getRandomItem } from "./get-random-item";
+import { getSeedsByDifficulty } from "./get-seeds-by-difficulty";
 
 const getRandomPuzzleByDifficulty = (difficulty: Difficulty): Puzzle => {
 	const seedsByDifficulty = getSeedsByDifficulty(difficulty);
@@ -18,6 +10,4 @@ const getRandomPuzzleByDifficulty = (difficulty: Difficulty): Puzzle => {
 	return randomSeed.puzzle;
 };
 
-export {
-	getRandomPuzzleByDifficulty,
-};
+export { getRandomPuzzleByDifficulty };

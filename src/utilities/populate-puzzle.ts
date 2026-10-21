@@ -1,14 +1,5 @@
-import {
-	CELL_VALUE_PLACEHOLDER,
-	TOKENS,
-} from "../constants";
-
-import {
-	type Layout,
-	type PopulatedPuzzle,
-	type Puzzle,
-	type TokenMap,
-} from "../types";
+import { CELL_VALUE_PLACEHOLDER, TOKENS } from "../constants";
+import { type Layout, type PopulatedPuzzle, type Puzzle, type TokenMap } from "../types";
 
 interface PopulatePuzzleParams {
 	puzzle: Puzzle;
@@ -16,11 +7,7 @@ interface PopulatePuzzleParams {
 	tokenMap: TokenMap;
 }
 
-const populatePuzzle = ({
-	puzzle,
-	layout,
-	tokenMap,
-}: PopulatePuzzleParams): PopulatedPuzzle => {
+const populatePuzzle = ({ puzzle, layout, tokenMap }: PopulatePuzzleParams): PopulatedPuzzle => {
 	let populatedPuzzle: PopulatedPuzzle = "";
 
 	layout.forEach((row) => {
@@ -33,8 +20,8 @@ const populatePuzzle = ({
 				return;
 			}
 
-			const token = TOKENS.find((token) => {
-				return token === tokenOrPlaceholder;
+			const token = TOKENS.find((candidateToken) => {
+				return candidateToken === tokenOrPlaceholder;
 			});
 
 			if (token === undefined) {
@@ -48,6 +35,4 @@ const populatePuzzle = ({
 	return populatedPuzzle;
 };
 
-export {
-	populatePuzzle,
-};
+export { populatePuzzle };

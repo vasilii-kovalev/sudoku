@@ -1,7 +1,7 @@
 :root {
+	--border-radius: 2px;
 	--color-dark: #202124;
 	--color-light: white;
-	--border-radius: 2px;
 	--primary-color: var(--color-dark);
 	--secondary-color: var(--color-light);
 }
@@ -16,8 +16,9 @@
 body {
 	background-color: var(--secondary-color);
 	color: var(--primary-color);
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-		Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+	font-family:
+		-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans",
+		"Helvetica Neue", sans-serif;
 }
 
 button,
@@ -39,10 +40,7 @@ input {
 a,
 button,
 select {
-	&:where(
-		:focus,
-		:hover
-	) {
+	&:where(:focus, :hover) {
 		background-color: var(--primary-color);
 		color: var(--secondary-color);
 	}
@@ -53,10 +51,7 @@ select {
 	}
 }
 
-a:where(
-	:focus,
-	:hover
-) {
+a:where(:focus, :hover) {
 	text-decoration: none;
 }
 

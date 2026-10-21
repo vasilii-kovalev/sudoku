@@ -1,30 +1,15 @@
-import {
-	CELL_VALUE_EMPTY,
-	CELL_VALUE_PLACEHOLDER,
-	CELL_VALUES,
-	DEFAULT_DIFFICULTY,
-	DIFFICULTY,
-} from "./constants";
-import {
-	getCellIndicesWithError,
-} from "./utilities/get-cell-indices-with-error";
-import {
-	getPopulatedPuzzle,
-} from "./utilities/get-populated-puzzle";
-
-import {
-	type CellInputInfo,
-	type CellValue,
-	type Difficulty,
-} from "./types";
+import { CELL_VALUE_EMPTY, CELL_VALUE_PLACEHOLDER, CELL_VALUES, DEFAULT_DIFFICULTY, DIFFICULTY } from "./constants";
+import { type CellInputInfo, type CellValue, type Difficulty } from "./types";
+import { getCellIndicesWithError } from "./utilities/get-cell-indices-with-error";
+import { getPopulatedPuzzle } from "./utilities/get-populated-puzzle";
 
 const getCellValue = (value: string): CellValue | typeof CELL_VALUE_EMPTY => {
 	if (value === CELL_VALUE_EMPTY) {
 		return value;
 	}
 
-	const cellValue = CELL_VALUES.find((cellValue) => {
-		return cellValue === value;
+	const cellValue = CELL_VALUES.find((candidateCellValue) => {
+		return candidateCellValue === value;
 	});
 
 	if (cellValue === undefined) {
@@ -60,13 +45,13 @@ const getSelectedDifficulty = (selectElement: HTMLSelectElement): Difficulty => 
 	return selectedDifficulty ?? DEFAULT_DIFFICULTY;
 };
 
-const setFocusToBoardElement = () => {
+const setFocusToBoardElement = (): void => {
 	const boardElement = document.getElementById("board");
 
 	boardElement?.focus();
 };
 
-const generateBoard = () => {
+const generateBoard = (): void => {
 	const selectElement = getDifficultySelectElement();
 
 	const selectedDifficulty = getSelectedDifficulty(selectElement);
@@ -94,7 +79,7 @@ const generateBoard = () => {
 	});
 };
 
-const validateBoard = () => {
+const validateBoard = (): void => {
 	const cellInputElements = getCellInputElements();
 	const cellInputsInfo = cellInputElements.map<CellInputInfo>((cellInput, index) => {
 		return {
@@ -116,10 +101,7 @@ const validateBoard = () => {
 	});
 
 	const isBoardFilledCorrectly = cellInputsInfo.every((cellInputInfo, index) => {
-		return (
-			cellInputInfo.value !== CELL_VALUE_EMPTY
-			&& !cellInputIndicesWithError.has(index)
-		);
+		return cellInputInfo.value !== CELL_VALUE_EMPTY && !cellInputIndicesWithError.has(index);
 	});
 
 	if (!isBoardFilledCorrectly) {
@@ -137,7 +119,7 @@ const validateBoard = () => {
 	}
 };
 
-const handleCellInput = (event: Event) => {
+const handleCellInput = (event: Event): void => {
 	const cellInputElement = event.currentTarget;
 
 	if (!(cellInputElement instanceof HTMLInputElement)) {
@@ -145,7 +127,7 @@ const handleCellInput = (event: Event) => {
 	}
 
 	const nextValue = cellInputElement.value;
-	const inputRegexpResult = /^(?<value>[1-9])/.exec(nextValue);
+	const inputRegexpResult = /^(?<value>[1-9])/u.exec(nextValue);
 	const validValue = inputRegexpResult?.groups?.value;
 
 	// Includes incorrect and empty values.
@@ -156,22 +138,16 @@ const handleCellInput = (event: Event) => {
 	}
 
 	// Without timeout, the "congratulations" confirmation window appears before a new value is set to the input cell.
-	setTimeout(
-		() => {
-			validateBoard();
-		},
-		0,
-	);
+	setTimeout(() => {
+		validateBoard();
+	}, 0);
 };
 
-const getCellInputElementsWithChanges = () => {
+const getCellInputElementsWithChanges = (): Array<HTMLInputElement> => {
 	const cellInputElements = getCellInputElements();
 
 	return cellInputElements.filter((cellInputElement) => {
-		return (
-			!cellInputElement.readOnly
-			&& cellInputElement.value !== CELL_VALUE_EMPTY
-		);
+		return !cellInputElement.readOnly && cellInputElement.value !== CELL_VALUE_EMPTY;
 	});
 };
 
@@ -183,7 +159,7 @@ const getConfirmationToClearBoard = (cellInputElementsWithChanges: Array<HTMLInp
 	return window.confirm("Any changes will be lost. Proceed?");
 };
 
-const resetBoard = () => {
+const resetBoard = (): void => {
 	const cellInputElementsWithChanges = getCellInputElementsWithChanges();
 	const canResetBoard = getConfirmationToClearBoard(cellInputElementsWithChanges);
 
@@ -198,7 +174,7 @@ const resetBoard = () => {
 	}
 };
 
-const generateNewBoard = () => {
+const generateNewBoard = (): void => {
 	const cellInputElementsWithChanges = getCellInputElementsWithChanges();
 	const canGenerateBoard = getConfirmationToClearBoard(cellInputElementsWithChanges);
 
@@ -211,7 +187,7 @@ const generateNewBoard = () => {
 	}
 };
 
-const handlePageLeave = (event: BeforeUnloadEvent) => {
+const handlePageLeave = (event: BeforeUnloadEvent): void => {
 	const cellInputElementsWithChanges = getCellInputElementsWithChanges();
 
 	const canLeavePage = getConfirmationToClearBoard(cellInputElementsWithChanges);

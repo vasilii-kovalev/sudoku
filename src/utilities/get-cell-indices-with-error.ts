@@ -1,17 +1,7 @@
-import {
-	getCellInputsInfoWithErrorInBlocks,
-} from "./get-cell-inputs-info-with-error-in-blocks";
-import {
-	getCellInputsInfoWithErrorInColumns,
-} from "./get-cell-inputs-info-with-error-in-columns";
-import {
-	getCellInputsInfoWithErrorInRows,
-} from "./get-cell-inputs-info-with-error-in-rows";
-
-import {
-	type CellIndex,
-	type CellInputInfo,
-} from "../types";
+import { type CellIndex, type CellInputInfo } from "../types";
+import { getCellInputsInfoWithErrorInBlocks } from "./get-cell-inputs-info-with-error-in-blocks";
+import { getCellInputsInfoWithErrorInColumns } from "./get-cell-inputs-info-with-error-in-columns";
+import { getCellInputsInfoWithErrorInRows } from "./get-cell-inputs-info-with-error-in-rows";
 
 const getCellIndicesWithError = (cellInputsInfo: Array<CellInputInfo>): Set<CellIndex> => {
 	const cellInputIndicesWithError = new Set<CellIndex>();
@@ -37,6 +27,4 @@ const getCellIndicesWithError = (cellInputsInfo: Array<CellInputInfo>): Set<Cell
 	return cellInputIndicesWithError;
 };
 
-export {
-	getCellIndicesWithError,
-};
+export { getCellIndicesWithError };

@@ -1,13 +1,6 @@
-import {
-	BOARD_SIZE,
-} from "../constants";
-import {
-	getCellInputsInfoWithError,
-} from "./get-cell-inputs-info-with-error";
-
-import {
-	type CellInputInfo,
-} from "../types";
+import { BOARD_SIZE } from "../constants";
+import { type CellInputInfo } from "../types";
+import { getCellInputsInfoWithError } from "./get-cell-inputs-info-with-error";
 
 const getCellInputsInfoWithErrorInColumns = (cellInputsInfo: Array<CellInputInfo>): Array<CellInputInfo> => {
 	const cellInputsInfoWithError: Array<CellInputInfo> = [];
@@ -30,6 +23,4 @@ const getCellInputsInfoWithErrorInColumns = (cellInputsInfo: Array<CellInputInfo
 	return cellInputsInfoWithError;
 };
 
-export {
-	getCellInputsInfoWithErrorInColumns,
-};
+export { getCellInputsInfoWithErrorInColumns };

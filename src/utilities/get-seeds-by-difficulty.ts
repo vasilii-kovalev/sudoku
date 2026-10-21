@@ -1,11 +1,5 @@
-import {
-	SEEDS,
-} from "../constants";
-
-import {
-	type Difficulty,
-	type SeedInfo,
-} from "../types";
+import { SEEDS } from "../constants";
+import { type Difficulty, type SeedInfo } from "../types";
 
 const getSeedsByDifficulty = (difficulty: Difficulty): Array<SeedInfo> => {
 	return SEEDS.filter((seed) => {
@@ -13,6 +7,4 @@ const getSeedsByDifficulty = (difficulty: Difficulty): Array<SeedInfo> => {
 	});
 };
 
-export {
-	getSeedsByDifficulty,
-};
+export { getSeedsByDifficulty };

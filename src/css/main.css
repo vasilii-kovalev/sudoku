@@ -32,19 +32,20 @@
 
 .row,
 .cell {
-	--border-width-regular: 1px;
 	--border-width-bold: 2px;
+	--border-width-regular: 1px;
 }
 
 .cell {
-	--content-width-current: min(100vw, calc(var(--content-width) - var(--padding) * 2));
-	--row-border-width-total: calc(6 * var(--border-width-regular) + 4 * var(--border-width-bold));
+	--cell-size: calc(var(--cell-size-total) / var(--cells-in-row));
 	--cell-size-total: calc(var(--content-width-current) - var(--row-border-width-total));
 	--cells-in-row: 9;
-	--cell-size: calc(var(--cell-size-total) / var(--cells-in-row));
-	--font-size-coefficient: 0.65;
+	--content-width-current: min(100vw, calc(var(--content-width) - var(--padding) * 2));
+
 	/* TODO: find a better way to make the font size large enough and responsive. */
 	--font-size: calc(var(--cell-size) * var(--font-size-coefficient));
+	--font-size-coefficient: 0.65;
+	--row-border-width-total: calc(6 * var(--border-width-regular) + 4 * var(--border-width-bold));
 
 	aspect-ratio: 1;
 	background-color: var(--secondary-color);
@@ -68,7 +69,7 @@
 	}
 
 	&:read-only {
-		background-color: color(from var(--primary-color) srgb r g b / 0.1);
+		background-color: color(from var(--primary-color) srgb r g b / 10%);
 	}
 }
 
@@ -79,7 +80,7 @@
 	color: var(--color-light);
 
 	&:read-only {
-		background-color: color(from var(--background-color) srgb r g b / 0.2);
+		background-color: color(from var(--background-color) srgb r g b / 20%);
 		color: var(--primary-color);
 	}
 }
@@ -122,7 +123,6 @@
 
 /* Source: https://www.a11yproject.com/posts/how-to-hide-content */
 .visually-hidden {
-	clip: rect(0 0 0 0);
 	clip-path: inset(50%);
 	height: 1px;
 	overflow: hidden;

@@ -43,18 +43,18 @@ against browser Resource Timing, so these are the actual deployed assets.
 
 ## Size comparison (exact bytes)
 
-| Metric | Before | After | Reduction |
-| --- | ---: | ---: | ---: |
-| Requests | 30 | 3 | 90.00% |
-| HTML gzip | 1,410 | 1,383 | 1.91% |
-| CSS gzip | 1,746 | 1,173 | 32.82% |
-| JavaScript gzip | 10,812 | 3,589 | 66.81% |
-| **Total gzip bodies** | **13,968** | **6,145** | **56.01%** |
-| HTML decoded | 23,096 | 20,624 | 10.70% |
-| CSS decoded | 4,399 | 3,441 | 21.78% |
-| JavaScript decoded | 28,519 | 8,966 | 68.56% |
-| **Total decoded bodies** | **56,014** | **33,031** | **41.03%** |
-| Browser `transferSize` sum | 22,968 | 7,045 | 69.33% |
+| Metric                     |     Before |      After |  Reduction |
+| -------------------------- | ---------: | ---------: | ---------: |
+| Requests                   |         30 |          3 |     90.00% |
+| HTML gzip                  |      1,410 |      1,383 |      1.91% |
+| CSS gzip                   |      1,746 |      1,173 |     32.82% |
+| JavaScript gzip            |     10,812 |      3,589 |     66.81% |
+| **Total gzip bodies**      | **13,968** |  **6,145** | **56.01%** |
+| HTML decoded               |     23,096 |     20,624 |     10.70% |
+| CSS decoded                |      4,399 |      3,441 |     21.78% |
+| JavaScript decoded         |     28,519 |      8,966 |     68.56% |
+| **Total decoded bodies**   | **56,014** | **33,031** | **41.03%** |
+| Browser `transferSize` sum |     22,968 |      7,045 |     69.33% |
 
 Before: 1 HTML + 3 CSS + 26 JavaScript files.
 After: 1 HTML + 1 CSS + 1 JavaScript file.
@@ -101,31 +101,31 @@ All numbers reported here use the corrected DPR 1.5 run.
 
 ## Current individual load samples (milliseconds)
 
-| Mode | Run | TTFB | DOMContentLoaded | Load | Board ready |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| Cold | 1 | 75.50 | 169.60 | 171.00 | 169.50 |
-| Cold | 2 | 76.70 | 173.90 | 174.50 | 173.80 |
-| Cold | 3 | 75.90 | 164.50 | 167.80 | 164.40 |
-| Cold | 4 | 75.80 | 179.90 | 181.10 | 179.90 |
-| Cold | 5 | 78.00 | 172.70 | 173.60 | 172.60 |
-| Cache-enabled | 1 | 78.50 | 168.00 | 171.10 | 167.90 |
-| Cache-enabled | 2 | 84.10 | 182.70 | 184.10 | 182.60 |
-| Cache-enabled | 3 | 79.30 | 169.10 | 172.60 | 169.00 |
-| Cache-enabled | 4 | 80.50 | 177.60 | 181.80 | 177.50 |
-| Cache-enabled | 5 | 78.50 | 174.30 | 176.00 | 174.30 |
+| Mode          | Run |  TTFB | DOMContentLoaded |   Load | Board ready |
+| ------------- | --: | ----: | ---------------: | -----: | ----------: |
+| Cold          |   1 | 75.50 |           169.60 | 171.00 |      169.50 |
+| Cold          |   2 | 76.70 |           173.90 | 174.50 |      173.80 |
+| Cold          |   3 | 75.90 |           164.50 | 167.80 |      164.40 |
+| Cold          |   4 | 75.80 |           179.90 | 181.10 |      179.90 |
+| Cold          |   5 | 78.00 |           172.70 | 173.60 |      172.60 |
+| Cache-enabled |   1 | 78.50 |           168.00 | 171.10 |      167.90 |
+| Cache-enabled |   2 | 84.10 |           182.70 | 184.10 |      182.60 |
+| Cache-enabled |   3 | 79.30 |           169.10 | 172.60 |      169.00 |
+| Cache-enabled |   4 | 80.50 |           177.60 | 181.80 |      177.50 |
+| Cache-enabled |   5 | 78.50 |           174.30 | 176.00 |      174.30 |
 
 ## Median timing comparison (milliseconds; n=5 each)
 
-| Metric | Before | After | Reduction |
-| --- | ---: | ---: | ---: |
-| Cold TTFB | 77.50 | 75.90 | 2.06% |
-| Cold DOMContentLoaded | 987.50 | 172.70 | 82.51% |
-| Cold load | 992.30 | 173.60 | 82.51% |
-| Cold board ready | 987.40 | 172.60 | 82.52% |
-| Cache-enabled TTFB | 77.30 | 79.30 | -2.59% |
-| Cache-enabled DCL | 979.10 | 174.30 | 82.20% |
-| Cache-enabled load | 984.10 | 176.00 | 82.12% |
-| Cache-enabled board ready | 979.00 | 174.30 | 82.20% |
+| Metric                    | Before |  After | Reduction |
+| ------------------------- | -----: | -----: | --------: |
+| Cold TTFB                 |  77.50 |  75.90 |     2.06% |
+| Cold DOMContentLoaded     | 987.50 | 172.70 |    82.51% |
+| Cold load                 | 992.30 | 173.60 |    82.51% |
+| Cold board ready          | 987.40 | 172.60 |    82.52% |
+| Cache-enabled TTFB        |  77.30 |  79.30 |    -2.59% |
+| Cache-enabled DCL         | 979.10 | 174.30 |    82.20% |
+| Cache-enabled load        | 984.10 | 176.00 |    82.12% |
+| Cache-enabled board ready | 979.00 | 174.30 |    82.20% |
 
 Cold load range: before 972.00-1068.70 ms; after 167.80-181.10 ms.
 Cold board-ready range: before 967.20-1064.90 ms; after 164.40-179.90 ms.
@@ -153,31 +153,31 @@ asynchronous input validation and real user input latency.
 Initial current batch UTC: 2026-10-20T23:06:31.939Z.
 
 | Difficulty | Old median | New median | Old mean | New mean | Old P95 | New P95 |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| EASY | 0.30 | 0.40 | 0.417 | 0.470 | 1.40 | 1.10 |
-| MEDIUM | 0.20 | 1.20 | 0.245 | 1.243 | 0.30 | 2.20 |
-| HARD | 0.20 | 1.10 | 0.233 | 1.193 | 0.30 | 2.00 |
-| EXPERT | 0.20 | 0.40 | 0.233 | 0.610 | 0.30 | 1.50 |
+| ---------- | ---------: | ---------: | -------: | -------: | ------: | ------: |
+| EASY       |       0.30 |       0.40 |    0.417 |    0.470 |    1.40 |    1.10 |
+| MEDIUM     |       0.20 |       1.20 |    0.245 |    1.243 |    0.30 |    2.20 |
+| HARD       |       0.20 |       1.10 |    0.233 |    1.193 |    0.30 |    2.00 |
+| EXPERT     |       0.20 |       0.40 |    0.233 |    0.610 |    0.30 |    1.50 |
 
 The initial batch looked slower. To avoid drawing a conclusion from noisy
 sub-millisecond measurements, repeated the same four-difficulty batch three
 more times, each with its own 10 warm-ups + 100 samples per difficulty.
 Follow-up batches completed at 2026-10-20T23:07:04.628Z.
 
-| Repeat | Difficulty | Median | Mean | P95 | Max |
-| --- | --- | ---: | ---: | ---: | ---: |
-| 1 | EASY | 0.10 | 0.136 | 0.20 | 0.40 |
-| 1 | MEDIUM | 0.10 | 0.115 | 0.20 | 0.40 |
-| 1 | HARD | 0.10 | 0.107 | 0.20 | 0.30 |
-| 1 | EXPERT | 0.10 | 0.096 | 0.20 | 0.20 |
-| 2 | EASY | 0.10 | 0.117 | 0.20 | 0.40 |
-| 2 | MEDIUM | 0.10 | 0.109 | 0.20 | 0.30 |
-| 2 | HARD | 0.10 | 0.102 | 0.20 | 0.30 |
-| 2 | EXPERT | 0.10 | 0.102 | 0.20 | 0.50 |
-| 3 | EASY | 0.10 | 0.142 | 0.20 | 0.40 |
-| 3 | MEDIUM | 0.10 | 0.137 | 0.20 | 0.40 |
-| 3 | HARD | 0.10 | 0.159 | 0.20 | 2.90 |
-| 3 | EXPERT | 0.10 | 0.106 | 0.20 | 0.50 |
+| Repeat | Difficulty | Median |  Mean |  P95 |  Max |
+| ------ | ---------- | -----: | ----: | ---: | ---: |
+| 1      | EASY       |   0.10 | 0.136 | 0.20 | 0.40 |
+| 1      | MEDIUM     |   0.10 | 0.115 | 0.20 | 0.40 |
+| 1      | HARD       |   0.10 | 0.107 | 0.20 | 0.30 |
+| 1      | EXPERT     |   0.10 | 0.096 | 0.20 | 0.20 |
+| 2      | EASY       |   0.10 | 0.117 | 0.20 | 0.40 |
+| 2      | MEDIUM     |   0.10 | 0.109 | 0.20 | 0.30 |
+| 2      | HARD       |   0.10 | 0.102 | 0.20 | 0.30 |
+| 2      | EXPERT     |   0.10 | 0.102 | 0.20 | 0.50 |
+| 3      | EASY       |   0.10 | 0.142 | 0.20 | 0.40 |
+| 3      | MEDIUM     |   0.10 | 0.137 | 0.20 | 0.40 |
+| 3      | HARD       |   0.10 | 0.159 | 0.20 | 2.90 |
+| 3      | EXPERT     |   0.10 | 0.106 | 0.20 | 0.50 |
 
 All 12 follow-up medians were approximately 0.10 ms, with P95 0.20 ms.
 Some samples rounded to zero: duration was below timer resolution, not zero work.
@@ -190,11 +190,11 @@ speedup or regression from these data. Interactive cost remains very small.
 
 ## Current asset inventory
 
-| Gzip bytes | Decoded bytes | Path | Decoded SHA-256 |
-| ---: | ---: | --- | --- |
-| 1383 | 20624 | `/sudoku/` | `4d60a0378c4334e346c09e175411281b3d0a4f92fbb046eff40df1c65d28daae` |
-| 1173 | 3441 | `/sudoku/assets/index-Dv4bakve.css` | `0dc0d6cc6e378d6618eea110806de5ee80140d8edb80650521b2426a7b2469a7` |
-| 3589 | 8966 | `/sudoku/assets/index-8cAoamtL.js` | `ede6b058c9e8fa29df6952b7bdd8e8bd70ef35a390d4568e18972ae09cad5123` |
+| Gzip bytes | Decoded bytes | Path                                | Decoded SHA-256                                                    |
+| ---------: | ------------: | ----------------------------------- | ------------------------------------------------------------------ |
+|       1383 |         20624 | `/sudoku/`                          | `4d60a0378c4334e346c09e175411281b3d0a4f92fbb046eff40df1c65d28daae` |
+|       1173 |          3441 | `/sudoku/assets/index-Dv4bakve.css` | `0dc0d6cc6e378d6618eea110806de5ee80140d8edb80650521b2426a7b2469a7` |
+|       3589 |          8966 | `/sudoku/assets/index-8cAoamtL.js`  | `ede6b058c9e8fa29df6952b7bdd8e8bd70ef35a390d4568e18972ae09cad5123` |
 
 ## Conclusion
 

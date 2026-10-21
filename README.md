@@ -16,31 +16,50 @@ Uses Vite's vanilla TypeScript setup, with no UI framework or backend.
 - Supports light and dark color schemes
 - Supports responsiveness
 
-## Development
+## Installation
 
-Requires npm `^12.0.0` and Node.js `^22.22.2`, `^24.15.0`, or `>=26.0.0` (as specified in `package.json`).
+### Node.js and npm
+
+The root `package.json` `devEngines` field requires:
+
+- Node.js `^22.22.2 || ^24.15.0 || >=26.0.0`
+- npm `^12.0.0`
+
+Incompatible versions fail at install.
+
+### Setup
+
+From the repository root, install the locked dependencies:
 
 ```sh
 npm ci
-npm run dev
 ```
 
-The development server uses `/` as its base path.
-Open the local URL printed by Vite (normally <http://localhost:5173/>).
+## Scripts
 
-```sh
-npm run types:check
-npm run prod:build
-npm run prod:preview
-```
+- `dev` — Run the development server.
+- `prod:build` — Check TypeScript and build the production site.
+- `prod:preview` — Serve the production build locally.
+- `prod:publish` — Build the site and publish it to GitHub Pages.
+- `format:check` — Check formatting.
+- `format:fix` — Apply formatting.
+- `lint:css:check` — Check CSS.
+- `lint:css:fix` — Fix CSS lint issues.
+- `lint:markdown:check` — Check Markdown.
+- `lint:markdown:fix` — Fix Markdown lint issues.
+- `lint:spell:check` — Check spelling.
+- `lint:ts:check` — Lint TypeScript and report type errors.
+- `lint:ts:fix` — Apply TypeScript lint fixes.
 
-The build runs strict TypeScript 7 checking and Vite bundling, with `/sudoku/` as the base path.
-`prod:preview` serves the production build locally at `/sudoku/` (normally <http://localhost:4173/sudoku/>);
-it is not a production server.
+### Recommended extensions
 
-Application modules live in `src`, styles in `src/css`, and the page markup in `index.html`.
-Puzzle seeds are grouped by difficulty; generation randomizes their digits and rearranges the
-board using Sudoku-preserving rotations and row, column, band, and stack shuffles.
+The workspace recommends these extensions. The same list is in [`.vscode/extensions.json`](./.vscode/extensions.json):
+
+- Code Spell Checker
+- EditorConfig
+- markdownlint
+- Oxc
+- Stylelint
 
 ## External resources and inspirations
 

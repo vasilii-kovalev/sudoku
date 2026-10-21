@@ -1,5 +1,14 @@
 {
 	"editor.codeActionsOnSave": {
-		"source.fixAll.markdownlint": "explicit"
-	}
+		"source.fixAll.stylelint": "always",
+		"source.format.oxc": "always",
+		"source.fixAll.oxc": "always"
+	},
+	"editor.defaultFormatter": "oxc.oxc-vscode",
+	"editor.formatOnSave": false,
+	"js/ts.experimental.useTsgo": true,
+	"js/ts.tsdk.path": "./node_modules/typescript",
+	"stylelint.ignorePath": "${workspaceFolder}/.gitignore",
+	"stylelint.lintFiles.glob": "**/*.css",
+	"stylelint.validate": ["css"]
 }

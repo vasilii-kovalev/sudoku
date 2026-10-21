@@ -1,19 +1,8 @@
-import {
-	shuffleLayoutBands,
-} from "./shuffle-layout-bands";
-import {
-	shuffleLayoutColumns,
-} from "./shuffle-layout-columns";
-import {
-	shuffleLayoutRows,
-} from "./shuffle-layout-rows";
-import {
-	shuffleLayoutStacks,
-} from "./shuffle-layout-stacks";
-
-import {
-	type Layout,
-} from "../types";
+import { type Layout } from "../types";
+import { shuffleLayoutBands } from "./shuffle-layout-bands";
+import { shuffleLayoutColumns } from "./shuffle-layout-columns";
+import { shuffleLayoutRows } from "./shuffle-layout-rows";
+import { shuffleLayoutStacks } from "./shuffle-layout-stacks";
 
 const shuffleLayout = (layout: Layout): Layout => {
 	const layoutWithShuffledBands = shuffleLayoutBands(layout);
@@ -24,6 +13,4 @@ const shuffleLayout = (layout: Layout): Layout => {
 	return layoutWithShuffledColumns;
 };
 
-export {
-	shuffleLayout,
-};
+export { shuffleLayout };

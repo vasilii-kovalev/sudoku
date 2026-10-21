@@ -1,7 +1,4 @@
-import {
-	type Layout,
-	type SeedInfo,
-} from "./types";
+import { type Layout, type SeedInfo } from "./types";
 
 const DIFFICULTY = {
 	EASY: "EASY",

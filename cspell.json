@@ -1,5 +1,6 @@
 {
 	"ignorePaths": ["./history", "./src/constants.ts", "./LICENSE"],
-	"ignoreWords": ["nojekyll", "vite"],
+	"ignoreWords": ["nojekyll", "tsgolint", "vite"],
+	"useGitignore": true,
 	"version": "0.2"
 }

@@ -1,16 +1,7 @@
-import {
-	rotateLayout90,
-} from "./rotate-layout-90";
-import {
-	rotateLayout270,
-} from "./rotate-layout-270";
-import {
-	shuffleLayoutBands,
-} from "./shuffle-layout-bands";
-
-import {
-	type Layout,
-} from "../types";
+import { type Layout } from "../types";
+import { rotateLayout90 } from "./rotate-layout-90";
+import { rotateLayout270 } from "./rotate-layout-270";
+import { shuffleLayoutBands } from "./shuffle-layout-bands";
 
 const shuffleLayoutStacks = (layout: Layout): Layout => {
 	/*
@@ -26,6 +17,4 @@ const shuffleLayoutStacks = (layout: Layout): Layout => {
 	return rotatedBackLayout;
 };
 
-export {
-	shuffleLayoutStacks,
-};
+export { shuffleLayoutStacks };

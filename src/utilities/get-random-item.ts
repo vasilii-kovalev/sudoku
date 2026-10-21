@@ -9,6 +9,4 @@ const getRandomItem = <Item>(items: Array<Item>): Item => {
 	return items[randomIndex];
 };
 
-export {
-	getRandomItem,
-};
+export { getRandomItem };
