@@ -1,4 +1,4 @@
-import { type Layout, type Row } from "../types";
+import { type Layout, type Row } from "@/types";
 
 /**
  * @example

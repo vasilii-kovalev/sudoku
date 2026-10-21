@@ -1,4 +1,5 @@
-import { type Layout } from "../types";
+import { type Layout } from "@/types";
+
 import { getRandomItem } from "./get-random-item";
 import { rotateLayout0 } from "./rotate-layout-0";
 import { rotateLayout90 } from "./rotate-layout-90";

@@ -1,14 +1,15 @@
-import { BOARD_SIZE } from "../constants";
-import { type CellInputInfo } from "../types";
+import { BOARD_SIZE } from "@/constants";
+import { type CellInputInfo } from "@/types";
+
 import { getCellInputsInfoWithError } from "./get-cell-inputs-info-with-error";
 
 const getCellInputsInfoWithErrorInColumns = (cellInputsInfo: Array<CellInputInfo>): Array<CellInputInfo> => {
 	const cellInputsInfoWithError: Array<CellInputInfo> = [];
 
-	for (let columnIndex = 0; columnIndex < BOARD_SIZE; columnIndex++) {
+	for (let columnIndex = 0; columnIndex < BOARD_SIZE; columnIndex += 1) {
 		const cellInputsInfoInColumn: Array<CellInputInfo> = [];
 
-		for (let rowIndex = 0; rowIndex < BOARD_SIZE; rowIndex++) {
+		for (let rowIndex = 0; rowIndex < BOARD_SIZE; rowIndex += 1) {
 			const cellIndex = rowIndex * BOARD_SIZE + columnIndex;
 			const cellInputElement = cellInputsInfo[cellIndex];
 

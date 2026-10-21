@@ -1,5 +1,6 @@
-import { CELL_VALUES, TOKENS } from "../constants";
-import { type CellValue, type Token, type TokenMap } from "../types";
+import { CELL_VALUES, TOKENS } from "@/constants";
+import { type CellValue, type Token, type TokenMap } from "@/types";
+
 import { sortRandomly } from "./sort-randomly";
 
 const isTokenMap = (tokenMap: Record<string, CellValue>): tokenMap is TokenMap => {

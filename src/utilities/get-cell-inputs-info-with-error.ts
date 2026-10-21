@@ -1,5 +1,5 @@
-import { CELL_VALUES } from "../constants";
-import { type CellInputInfo } from "../types";
+import { CELL_VALUES } from "@/constants";
+import { type CellInputInfo } from "@/types";
 
 const getCellInputsInfoWithError = (cellInputsInfo: Array<CellInputInfo>): Array<CellInputInfo> => {
 	return CELL_VALUES.reduce<Array<CellInputInfo>>((cellInputsInfoWithErrorCurrent, cellValue) => {

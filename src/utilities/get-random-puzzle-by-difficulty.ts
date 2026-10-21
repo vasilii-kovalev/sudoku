@@ -1,4 +1,5 @@
-import { type Difficulty, type Puzzle } from "../types";
+import { type Difficulty, type Puzzle } from "@/types";
+
 import { getRandomItem } from "./get-random-item";
 import { getSeedsByDifficulty } from "./get-seeds-by-difficulty";
 

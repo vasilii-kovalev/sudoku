@@ -12,7 +12,7 @@ const getCellValue = (value: string): CellValue | typeof CELL_VALUE_EMPTY => {
 		return candidateCellValue === value;
 	});
 
-	if (cellValue === undefined) {
+	if (typeof cellValue === "undefined") {
 		throw new Error(`Invalid cell value: ${value}`);
 	}
 
@@ -51,6 +51,30 @@ const setFocusToBoardElement = (): void => {
 	boardElement?.focus();
 };
 
+const highlightIncorrectCells = (
+	cellInputElements: Array<HTMLInputElement>,
+	cellInputIndicesWithError: Set<number>,
+): void => {
+	cellInputElements.forEach((cellInputElement, index) => {
+		if (cellInputIndicesWithError.has(index)) {
+			cellInputElement.classList.add("highlighted");
+			cellInputElement.ariaInvalid = "true";
+		} else {
+			cellInputElement.classList.remove("highlighted");
+			cellInputElement.ariaInvalid = "false";
+		}
+	});
+};
+
+const isBoardFilledCorrectly = (
+	cellInputsInfo: Array<CellInputInfo>,
+	cellInputIndicesWithError: Set<number>,
+): boolean => {
+	return cellInputsInfo.every((cellInputInfo, index) => {
+		return cellInputInfo.value !== CELL_VALUE_EMPTY && !cellInputIndicesWithError.has(index);
+	});
+};
+
 const generateBoard = (): void => {
 	const selectElement = getDifficultySelectElement();
 
@@ -83,34 +107,19 @@ const validateBoard = (): void => {
 	const cellInputElements = getCellInputElements();
 	const cellInputsInfo = cellInputElements.map<CellInputInfo>((cellInput, index) => {
 		return {
-			value: getCellValue(cellInput.value),
 			index,
+			value: getCellValue(cellInput.value),
 		};
 	});
 
 	const cellInputIndicesWithError = getCellIndicesWithError(cellInputsInfo);
 
-	cellInputElements.forEach((cellInputElement, index) => {
-		if (cellInputIndicesWithError.has(index)) {
-			cellInputElement.classList.add("highlighted");
-			cellInputElement.ariaInvalid = "true";
-		} else {
-			cellInputElement.classList.remove("highlighted");
-			cellInputElement.ariaInvalid = "false";
-		}
-	});
+	highlightIncorrectCells(cellInputElements, cellInputIndicesWithError);
 
-	const isBoardFilledCorrectly = cellInputsInfo.every((cellInputInfo, index) => {
-		return cellInputInfo.value !== CELL_VALUE_EMPTY && !cellInputIndicesWithError.has(index);
-	});
-
-	if (!isBoardFilledCorrectly) {
-		return;
-	}
-
-	const shouldGenerateNewBoard = window.confirm("You solved the puzzle! Generate another one?");
-
-	if (shouldGenerateNewBoard) {
+	if (
+		isBoardFilledCorrectly(cellInputsInfo, cellInputIndicesWithError) &&
+		window.confirm("You solved the puzzle! Generate another one?")
+	) {
 		generateBoard();
 
 		validateBoard();
@@ -128,14 +137,9 @@ const handleCellInput = (event: Event): void => {
 
 	const nextValue = cellInputElement.value;
 	const inputRegexpResult = /^(?<value>[1-9])/u.exec(nextValue);
-	const validValue = inputRegexpResult?.groups?.value;
+	const validValue = inputRegexpResult?.groups?.value ?? CELL_VALUE_EMPTY;
 
-	// Includes incorrect and empty values.
-	if (validValue === undefined) {
-		cellInputElement.value = CELL_VALUE_EMPTY;
-	} else {
-		cellInputElement.value = validValue;
-	}
+	cellInputElement.value = validValue;
 
 	// Without timeout, the "congratulations" confirmation window appears before a new value is set to the input cell.
 	setTimeout(() => {

@@ -20,10 +20,10 @@ pencil marks, hints, and saved games increase state complexity, not guaranteed
 performance gains. Svelte fits the existing HTML/CSS structure; Solid offers
 JSX and fine-grained reactivity.
 
-SvelteKit with `adapter-static` and prerendering, or SolidStart with route
-prerendering, can generate all 81 empty inputs at build time for GitHub Pages.
+SvelteKit with `adapter-static` and pre-rendering, or SolidStart with route
+pre-rendering, can generate all 81 empty inputs at build time for GitHub Pages.
 Component loops replace repeated markup while preserving static HTML delivery.
-Basic client-rendered Vite setups do not automatically prerender.
+Basic client-rendered Vite setups do not automatically pre-render.
 
 Hydrate the empty board in the browser, then generate a random puzzle to avoid
 hydration mismatches. Visitors need not share a puzzle; only generating puzzle

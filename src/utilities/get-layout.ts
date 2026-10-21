@@ -1,5 +1,6 @@
-import { BASE_LAYOUT } from "../constants";
-import { type Layout } from "../types";
+import { BASE_LAYOUT } from "@/constants";
+import { type Layout } from "@/types";
+
 import { rotateLayout } from "./rotate-layout";
 import { shuffleLayout } from "./shuffle-layout";
 

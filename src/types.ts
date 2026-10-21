@@ -6,13 +6,13 @@ import {
 	type TOKEN,
 } from "./constants";
 
-type Values<Type> = Type[keyof Type];
+type ObjectValues<Type> = Type[keyof Type];
 
-type Difficulty = Values<typeof DIFFICULTY>;
+type Difficulty = ObjectValues<typeof DIFFICULTY>;
 
-type Token = Values<typeof TOKEN>;
+type Token = ObjectValues<typeof TOKEN>;
 
-type CellValue = Values<typeof CELL_VALUE>;
+type CellValue = ObjectValues<typeof CELL_VALUE>;
 
 type TokenOrPlaceholder = Token | typeof CELL_VALUE_PLACEHOLDER;
 

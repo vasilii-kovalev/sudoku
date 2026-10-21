@@ -1,4 +1,4 @@
-import { type CellIndex, type Layout, type Row } from "../types";
+import { type CellIndex, type Layout, type Row } from "@/types";
 
 /**
  * @example
@@ -12,7 +12,7 @@ const rotateLayout90 = (layout: Layout): Layout => {
 	// The row is not necessary to be the first. We need any row to get column indices to use in a loop.
 	const [firstRow] = layout;
 
-	return firstRow.map<Row>((_, index) => {
+	return firstRow.map<Row>((_cellIndex, index) => {
 		/*
 			For `index = 0`, the array contains the 1st values of all rows.
 			For `index = 1`, the array contains the 2nd values of all rows, etc.

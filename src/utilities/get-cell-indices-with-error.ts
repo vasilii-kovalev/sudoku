@@ -1,4 +1,5 @@
-import { type CellIndex, type CellInputInfo } from "../types";
+import { type CellIndex, type CellInputInfo } from "@/types";
+
 import { getCellInputsInfoWithErrorInBlocks } from "./get-cell-inputs-info-with-error-in-blocks";
 import { getCellInputsInfoWithErrorInColumns } from "./get-cell-inputs-info-with-error-in-columns";
 import { getCellInputsInfoWithErrorInRows } from "./get-cell-inputs-info-with-error-in-rows";

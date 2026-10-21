@@ -1,4 +1,5 @@
-import { type Difficulty, type PopulatedPuzzle } from "../types";
+import { type Difficulty, type PopulatedPuzzle } from "@/types";
+
 import { getLayout } from "./get-layout";
 import { getRandomPuzzleByDifficulty } from "./get-random-puzzle-by-difficulty";
 import { getTokenMap } from "./get-token-map";
@@ -10,8 +11,8 @@ const getPopulatedPuzzle = (difficulty: Difficulty): PopulatedPuzzle => {
 	const tokenMap = getTokenMap();
 
 	const populatedPuzzle = populatePuzzle({
-		puzzle,
 		layout,
+		puzzle,
 		tokenMap,
 	});
 

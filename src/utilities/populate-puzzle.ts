@@ -1,5 +1,5 @@
-import { CELL_VALUE_PLACEHOLDER, TOKENS } from "../constants";
-import { type Layout, type PopulatedPuzzle, type Puzzle, type TokenMap } from "../types";
+import { CELL_VALUE_PLACEHOLDER, TOKENS } from "@/constants";
+import { type Layout, type PopulatedPuzzle, type Puzzle, type TokenMap } from "@/types";
 
 interface PopulatePuzzleParams {
 	puzzle: Puzzle;
@@ -24,7 +24,7 @@ const populatePuzzle = ({ puzzle, layout, tokenMap }: PopulatePuzzleParams): Pop
 				return candidateToken === tokenOrPlaceholder;
 			});
 
-			if (token === undefined) {
+			if (typeof token === "undefined") {
 				throw new Error(`Invalid puzzle token at cell ${cellIndex}: ${tokenOrPlaceholder}`);
 			}
 

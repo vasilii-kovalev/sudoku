@@ -1,4 +1,5 @@
-import { type Layout } from "../types";
+import { type Layout } from "@/types";
+
 import { getLayoutBands } from "./get-layout-bands";
 import { sortRandomly } from "./sort-randomly";
 
