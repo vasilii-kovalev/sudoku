@@ -1,7 +1,8 @@
+import { getSudoku } from "sudoku-gen";
+
 import { CELL_VALUE_EMPTY, CELL_VALUE_PLACEHOLDER, CELL_VALUES, DEFAULT_DIFFICULTY, DIFFICULTY } from "./constants";
 import { type CellInputInfo, type CellValue, type Difficulty } from "./types";
 import { getCellIndicesWithError } from "./utilities/get-cell-indices-with-error";
-import { getPopulatedPuzzle } from "./utilities/get-populated-puzzle";
 
 const getCellValue = (value: string): CellValue | typeof CELL_VALUE_EMPTY => {
 	if (value === CELL_VALUE_EMPTY) {
@@ -82,12 +83,12 @@ const generateBoard = (): void => {
 
 	selectElement.value = selectedDifficulty;
 
-	const populatedPuzzle = getPopulatedPuzzle(selectedDifficulty);
+	const { puzzle } = getSudoku(selectedDifficulty);
 
 	const cellInputElements = getCellInputElements();
 
 	cellInputElements.forEach((cellInputElement, index) => {
-		const value = populatedPuzzle[index];
+		const value = puzzle[index];
 
 		if (value === CELL_VALUE_PLACEHOLDER) {
 			cellInputElement.value = CELL_VALUE_EMPTY;

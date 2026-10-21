@@ -18,6 +18,9 @@
 		"lint:ts:check": "oxlint --ignore-path .gitignore",
 		"lint:ts:fix": "npm run lint:ts:check -- --fix"
 	},
+	"dependencies": {
+		"sudoku-gen": "1.0.3"
+	},
 	"devDependencies": {
 		"cspell": "10.4.0",
 		"gh-pages": "6.3.0",
