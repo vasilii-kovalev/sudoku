@@ -3,5 +3,20 @@
 	"ignorePaths": ["./history", "./LICENSE"],
 	"useGitignore": true,
 	"version": "0.2",
-	"words": ["cantarell", "fira", "linejoin", "neue", "nojekyll", "picklist", "roboto", "segoe", "tsgolint"]
+	"words": [
+		"cantarell",
+		"fira",
+		"katex",
+		"linejoin",
+		"neue",
+		"nojekyll",
+		"oneclickpush",
+		"picklist",
+		"roboto",
+		"rumdl",
+		"segoe",
+		"serwist",
+		"smol",
+		"tsgolint"
+	]
 }

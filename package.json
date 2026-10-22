@@ -14,7 +14,7 @@
 		"format:fix": "oxfmt",
 		"lint:css:check": "stylelint \"**/*.css\" --ignore-path .gitignore",
 		"lint:css:fix": "npm run lint:css:check -- --fix",
-		"lint:markdown:check": "markdownlint \"**/*.md\" --ignore-path .gitignore",
+		"lint:markdown:check": "markdownlint-cli2",
 		"lint:markdown:fix": "npm run lint:markdown:check -- --fix",
 		"lint:spell:check": "cspell . --quiet --no-show-suggestions && cspell-check-unused-words",
 		"lint:ts:check": "oxlint --ignore-path .gitignore",
@@ -30,17 +30,27 @@
 		"cspell": "10.4.0",
 		"cspell-check-unused-words": "1.6.3",
 		"gh-pages": "6.3.0",
-		"markdownlint-cli": "0.49.1",
+		"markdownlint-cli2": "0.23.3",
 		"oxfmt": "0.73.0",
 		"oxlint": "1.88.0",
 		"oxlint-tsgolint": "7.0.2004",
-		"sharp": "0.34.5",
+		"sharp": "0.35.5",
 		"stylelint": "17.16.0",
 		"stylelint-config-standard": "40.0.0",
 		"stylelint-order": "8.1.2",
 		"typescript": "7.0.2",
 		"vite": "8.3.4",
 		"vite-plugin-pwa": "2.0.0"
+	},
+	"overrides": {
+		"make-dir": {
+			"semver": "6.3.1"
+		},
+		"markdownlint-cli2": {
+			"katex": "0.19.0",
+			"markdown-it": "15.0.3",
+			"smol-toml": "1.9.1"
+		}
 	},
 	"devEngines": {
 		"packageManager": {
