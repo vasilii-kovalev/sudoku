@@ -38,6 +38,8 @@ The script finds its elements in `index.html` by ID and fails fast when a requir
 
 The controls and the board start disabled inside a `fieldset`, and the script enables them once a game is on the board. A module script runs after the page is displayed, and anything typed before that would be neither checked nor saved.
 
+The difficulty select stores the difficulty used the next time a board is generated. Generate board and Reset board replace the board, and each asks before discarding entries the player has made. Choosing an option only changes the select, including when the arrow keys move through the list. [W3C technique H84](https://www.w3.org/WAI/WCAG22/Techniques/html/H84), a way to meet [Success Criterion 3.2.2, On Input](https://www.w3.org/WAI/WCAG22/Understanding/on-input), puts the action on a separate button because keyboard users change the selected option while they are still choosing. [WebAIM's form controls](https://webaim.org/techniques/forms/controls) describe the same split.
+
 ## Saved games
 
 The current game is one JSON value in `localStorage`: the puzzle and the current values as 81-character strings in SudokuGen's format, the selected difficulty, and a format version. SudokuGen's format lets a generated puzzle be saved without conversion. The difficulty is stored apart from the puzzle because it applies to the next generated board.
