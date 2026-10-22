@@ -68,8 +68,8 @@ The workspace recommends these extensions. The same list is in [`.vscode/extensi
 
 - Code Spell Checker
 - EditorConfig
-- markdownlint
 - Oxc
+- rumdl
 - Stylelint
 
 ## External resources and inspirations
