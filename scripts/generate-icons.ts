@@ -114,51 +114,54 @@ interface IconVariant {
 	viewBox: string;
 }
 
-await Promise.all(
-	Object.values(themes).map<Promise<void>>(async (theme) => {
-		const svg = source.replace(SVG_STYLE_BLOCK_PATTERN, `<style>${themeStyles(theme)}${geometryStyles}</style>`);
-		const variants: Array<IconVariant> = [
-			{
-				name: `icon-192${theme.suffix}.png`,
-				size: 192,
-				viewBox: "0 0 96 96",
-			},
-			{
-				name: `icon-512${theme.suffix}.png`,
-				size: 512,
-				viewBox: "0 0 96 96",
-			},
-			{
-				name: `icon-mask${theme.suffix}.png`,
-				size: 512,
-				viewBox: "-30 -30 156 156",
-			},
-			{
-				name: `apple-touch-icon${theme.suffix}.png`,
-				size: 180,
-				viewBox: "-8 -8 112 112",
-			},
-		];
+// PNG and ICO bytes follow the fonts installed here and the sharp build, so the check compares icon.svg only.
+if (!check) {
+	await Promise.all(
+		Object.values(themes).map<Promise<void>>(async (theme) => {
+			const svg = source.replace(SVG_STYLE_BLOCK_PATTERN, `<style>${themeStyles(theme)}${geometryStyles}</style>`);
+			const variants: Array<IconVariant> = [
+				{
+					name: `icon-192${theme.suffix}.png`,
+					size: 192,
+					viewBox: "0 0 96 96",
+				},
+				{
+					name: `icon-512${theme.suffix}.png`,
+					size: 512,
+					viewBox: "0 0 96 96",
+				},
+				{
+					name: `icon-mask${theme.suffix}.png`,
+					size: 512,
+					viewBox: "-30 -30 156 156",
+				},
+				{
+					name: `apple-touch-icon${theme.suffix}.png`,
+					size: 180,
+					viewBox: "-8 -8 112 112",
+				},
+			];
 
-		await Promise.all(
-			variants.map<Promise<void>>(async (variant) => {
-				// Flatten supplies a full-bleed background without antialiased seams at the SVG's original edges.
-				const input = svg
-					.replace('viewBox="0 0 96 96"', `viewBox="${variant.viewBox}"`)
-					.replace(SVG_BACKGROUND_PATH_PATTERN, "");
+			await Promise.all(
+				variants.map<Promise<void>>(async (variant) => {
+					// Flatten supplies a full-bleed background without antialiased seams at the SVG's original edges.
+					const input = svg
+						.replace('viewBox="0 0 96 96"', `viewBox="${variant.viewBox}"`)
+						.replace(SVG_BACKGROUND_PATH_PATTERN, "");
 
-				const png = await sharp(Buffer.from(input))
-					.resize(variant.size, variant.size)
-					.flatten({ background: theme.background })
-					.png()
-					.toBuffer();
+					const png = await sharp(Buffer.from(input))
+						.resize(variant.size, variant.size)
+						.flatten({ background: theme.background })
+						.png()
+						.toBuffer();
 
-				await emit(variant.name, png);
-			}),
-		);
+					await emit(variant.name, png);
+				}),
+			);
 
-		if (theme.suffix === "") {
-			await writeIco(svg);
-		}
-	}),
-);
+			if (theme.suffix === "") {
+				await writeIco(svg);
+			}
+		}),
+	);
+}

@@ -80,7 +80,7 @@ The SVG favicon switches between light and dark with a `prefers-color-scheme` me
 
 `public/icon.svg` is the source for every icon. `scripts/generate-icons.ts` replaces its `<style>` block with colors and font settings read from `theme.css`, writes the adaptive SVG back, and renders the PNG files with [sharp](https://www.sharpjs.cn/). Node.js has no built-in SVG renderer, and sharp covers rendering, resizing, and PNG output in one development dependency. Sharp does not write ICO files, so the script wraps a PNG in the 22-byte ICO header itself. The SVG uses the viewer's fonts, while the PNG digits use the fonts installed where the icons were generated.
 
-The generated files are committed. `icons:check` renders them again in memory and fails when a committed file differs; tests and production builds run it first, so a theme change cannot ship with outdated icons. The `theme-color` meta tags and the manifest colors repeat the two theme colors by hand.
+The generated files are committed. `icons:check` compares `icon.svg` and leaves the PNG and ICO files alone. Those rasters are drawn with the fonts installed on the machine that generated them and with the SVG renderer built into that version of sharp, so a byte comparison fails on another operating system or after a sharp upgrade. The SVG is text. The check rewrites its style block from `theme.css` and fails when the committed file differs, and production builds run the check first, so the SVG favicon stays aligned with the theme. A change to the SVG paths, or to the sizes and margins in the script, reaches the PNG and ICO files only when `icons:generate` is run. The `theme-color` meta tags and the manifest colors repeat the two theme colors by hand.
 
 ## Styles
 

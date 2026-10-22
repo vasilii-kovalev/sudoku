@@ -46,7 +46,7 @@ npm ci
 ## Scripts
 
 - `dev` — Run the development server.
-- `icons:check` — Verify that all icon assets match the theme and SVG geometry.
+- `icons:check` — Verify that the SVG icon matches the theme.
 - `icons:generate` — Regenerate light/dark PNG icons and the ICO fallback from the SVG.
 - `prod:build` — Check TypeScript and build the production site.
 - `prod:preview` — Serve the production build locally.
