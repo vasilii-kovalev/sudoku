@@ -1,0 +1,30 @@
+{
+	"id": "./",
+	"name": "Sudoku",
+	"short_name": "Sudoku",
+	"description": "An offline Sudoku game with locally saved progress.",
+	"lang": "en",
+	"start_url": "./",
+	"scope": "./",
+	"display": "standalone",
+	"background_color": "#202124",
+	"theme_color": "#202124",
+	"icons": [
+		{
+			"src": "./icon-192-dark.png",
+			"sizes": "192x192",
+			"type": "image/png"
+		},
+		{
+			"src": "./icon-512-dark.png",
+			"sizes": "512x512",
+			"type": "image/png"
+		},
+		{
+			"src": "./icon-mask-dark.png",
+			"sizes": "512x512",
+			"type": "image/png",
+			"purpose": "maskable"
+		}
+	]
+}
