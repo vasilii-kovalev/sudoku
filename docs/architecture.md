@@ -16,9 +16,9 @@ The move to Vite and TypeScript bundled the modules: the deployed page went from
 
 ## Hosting
 
-GitHub Pages hosts the site as a project site under `https://vasilii-kovalev.github.io/sudoku/`.
+GitHub Pages is the only deployment target. It keeps hosting beside the source repository, costs nothing for this project, and avoids a dedicated server. The site is a project site under `https://vasilii-kovalev.github.io/sudoku/`.
 
-Publishing is a local step: `prod:publish` builds the site, and the `gh-pages` package pushes `dist/` to the root of the `gh-pages` branch. There is no deployment workflow in the repository. Pages used to serve a `dist/` committed to `main`; a separate branch keeps build output out of the source history.
+Publishing is a local step: `prod:publish` builds the site, and the `gh-pages` package pushes `dist/` to the root of the `gh-pages` branch. There is no deployment workflow in the repository. A local step is simpler to maintain and operate, and small commits do not start a deployment on every push. Pages used to serve a `dist/` committed to `main`; a separate branch keeps build output out of the source history.
 
 Asset URLs are relative, so the same build works at a domain root and under a project-site prefix. No source file contains a host name or a repository path. The development server still serves that relative layout from `/`.
 
@@ -94,11 +94,13 @@ Styles are plain CSS. Modern CSS already provides the features this project need
 
 Node.js and npm replaced Bun with the move to Vite. They were chosen because they are already familiar and because the rest of the tools run on Node.js anyway.
 
-npm 12 was chosen because its install-time security defaults are stricter than earlier majors. The Node.js range is recorded only in the `devEngines` field — there is no `engines` field, top-level `packageManager` field, or `.node-version` file — and copies npm 12's own `engines.node`, so the two stay aligned. Odd-numbered short-lived lines such as 23 and 25 are omitted. Every allowed version runs TypeScript files directly, so the icon generator and the config files need no compile step. Selecting a compatible Node.js and npm version remains a local responsibility.
+npm 12 was chosen because its install-time security defaults are stricter than earlier majors. The Node.js range is recorded only in the `devEngines` field — there is no `engines` field, top-level `packageManager` field, or `.node-version` file — and copies npm 12's own `engines.node`, so the two stay aligned. Odd-numbered short-lived lines such as 23 and 25 are omitted. Every allowed version runs TypeScript files directly, so the icon generator and the config files need no compile step. An incompatible version stops the install. Selecting a compatible Node.js and npm version remains a local responsibility.
 
 `.npmrc` sets `save-exact` and `min-release-age=3`. Every dependency and development dependency uses an exact version. The lockfile is committed, and a clean install uses `npm ci`.
 
 `dependencies` lists only code that ships to the browser: SudokuGen and Valibot. Everything else runs at build or development time.
+
+Small helpers are written by hand. A general-purpose utility library would replace only a few lines.
 
 ### TypeScript
 
@@ -106,7 +108,7 @@ Application code, tests, the icon generator, and configuration use TypeScript 7.
 
 As in Vite's templates, the configuration is split by runtime. `tsconfig.app.json` covers `src/`, tests included. Its `types` list names only `vite/client` and `vite-plugin-pwa/client`, which declare `import.meta.env` and the plugin's `virtual:pwa-register` module, so the installed `@types/node` does not leak Node globals into browser code. `tsconfig.node.json` covers the icon generator and the tool configs, which run in Node rather than in the browser. The root `tsconfig.json` has no sources of its own and only references the two, so a plain `tsc` checks nothing; the production build runs `tsc -b`.
 
-`@types/node` is pinned to the Node 22 line to match the minimum supported runtime major rather than expose APIs from newer majors.
+The production bundle target is Vite's default, not a duplicated `build.target`. Node configs use the language level of the minimum Node.js version in `devEngines`. `@types/node` is pinned to the Node 22 line to match the minimum supported runtime major rather than expose APIs from newer majors.
 
 `@/` reaches a file under `src/`, and Vite resolves it from the same TypeScript paths. Files in nested directories, such as utilities and tests, use `@/` because parent-relative imports are forbidden.
 
@@ -114,16 +116,8 @@ As in Vite's templates, the configuration is split by runtime. `tsconfig.app.jso
 
 Lint and format commands are plain npm scripts without caching. They run rarely enough that caching would not pay off.
 
-Oxlint enables every category except `nursery`, which the Oxlint docs mark as unstable by design. There is no separate type-check script: Oxlint `typeCheck` reports type errors alongside its rules. Oxfmt reads indentation and line width from `.editorconfig`: tabs, with spaces in Markdown.
+Oxlint and Oxfmt are used for speed. Oxlint enables every category except `nursery`, which the Oxlint docs mark as unstable by design. There is no separate type-check script: Oxlint `typeCheck` reports type errors alongside its rules. Oxfmt reads indentation and line width from `.editorconfig`: tabs, with spaces in Markdown.
 
 Generated and tooling output lives in `.gitignore`. Directory entries use a trailing `/**` so Oxlint `--ignore-path .gitignore` skips files even when a path is passed explicitly on the CLI; a plain `dist/` entry is not enough. Oxfmt, Stylelint, Markdownlint, and CSpell follow the same ignore file.
 
 Stylelint checks the CSS: Oxlint does not lint it, and Oxfmt formats it without validating it. The configuration is `stylelint.config.mjs`. A TypeScript config would load through Cosmiconfig, and Cosmiconfig 9 does not work with TypeScript 7 without pinning a newer Cosmiconfig. Plain ESM avoids maintaining that pin; the config shape is checked with a JSDoc `@type` instead.
-
-Code follows two goals, consistency and strict types. Oxlint enforces most of the conventions; two are kept by hand.
-
-Each module in `src/` that exports anything ends with one `export { … }` statement. Exports at the bottom mirror imports at the top and state the module's contract. Oxlint has no rule against a single inline `export const`, so this is a convention.
-
-Array methods that can change the shape of the data, such as `map`, `flatMap`, and `reduce`, receive an explicit type argument, and functions declare their return types. A mismatch is then reported where the value is defined, not where it is used, possibly in another file. Oxlint requires the return types but has no rule for the type arguments.
-
-On Windows, the VS Code Oxc extension keeps the Oxlint and Oxfmt native binaries open, so `npm ci` fails with `EPERM` while it runs. Reload the window or stop the extension's language servers first.
