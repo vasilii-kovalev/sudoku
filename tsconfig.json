@@ -1,24 +1,11 @@
 {
-	"compilerOptions": {
-		"target": "ESNext",
-		"module": "ESNext",
-		"lib": ["ES2023", "DOM", "DOM.Iterable"],
-		"types": ["vite/client"],
-		"allowArbitraryExtensions": true,
-		"skipLibCheck": true,
-		"moduleResolution": "bundler",
-		"verbatimModuleSyntax": true,
-		"moduleDetection": "force",
-		"noEmit": true,
-		"strict": true,
-		// Oxlint checks unused locals and allows names starting with "_"; TypeScript cannot configure that exception.
-		"noUnusedLocals": false,
-		"noUnusedParameters": true,
-		"erasableSyntaxOnly": true,
-		"noFallthroughCasesInSwitch": true,
-		"paths": {
-			"@/*": ["${configDir}/src/*"]
+	"files": [],
+	"references": [
+		{
+			"path": "./tsconfig.app.json"
+		},
+		{
+			"path": "./tsconfig.node.json"
 		}
-	},
-	"include": ["src", "vite.config.ts"]
+	]
 }

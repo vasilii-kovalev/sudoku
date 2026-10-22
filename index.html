@@ -3,6 +3,12 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+		<meta name="theme-color" content="#202124" media="(prefers-color-scheme: dark)" />
+		<link rel="icon" href="./favicon.ico" sizes="32x32" />
+		<link rel="icon" href="./icon.svg" type="image/svg+xml" />
+		<link id="apple-touch-icon" rel="apple-touch-icon" href="./apple-touch-icon.png" />
+		<link id="app-manifest" rel="manifest" href="./manifest.webmanifest" />
 
 		<link href="./src/css/reset.css" rel="stylesheet" type="text/css" />
 		<link href="./src/css/theme.css" rel="stylesheet" type="text/css" />
@@ -29,798 +35,801 @@
 
 			<hr class="divider" />
 
-			<section>
-				<h2 class="visually-hidden">Controls</h2>
+			<!-- Disabled until the script restores or generates a game. -->
+			<fieldset id="game" disabled>
+				<section>
+					<h2 class="visually-hidden">Controls</h2>
 
-				<div class="controls-row">
-					<label for="difficulty">
-						Choose difficulty
-
-						<select id="difficulty">
-							<option value="easy">Easy</option>
-							<option value="medium">Medium</option>
-							<option value="hard">Hard</option>
-							<option value="expert">Expert</option>
-						</select>
-					</label>
-
-					<!--
-						These buttons are grouped to improve wrapping experience on small screens.
-						When it happens, the buttons are placed on the same line rather than only the last one is placed there.
-						If the screen is even smaller, the buttons are displayed one under another like if they weren't grouped.
-					-->
 					<div class="controls-row">
-						<button type="button" id="generate-board">Generate board</button>
+						<label for="difficulty">
+							Choose difficulty
 
-						<button type="button" id="reset-board">Reset board</button>
+							<select id="difficulty">
+								<option value="easy">Easy</option>
+								<option value="medium">Medium</option>
+								<option value="hard">Hard</option>
+								<option value="expert">Expert</option>
+							</select>
+						</label>
+
+						<!--
+							These buttons are grouped to improve wrapping experience on small screens.
+							When it happens, the buttons are placed on the same line rather than only the last one is placed there.
+							If the screen is even smaller, the buttons are displayed one under another like if they weren't grouped.
+						-->
+						<div class="controls-row">
+							<button type="button" id="generate-board">Generate board</button>
+
+							<button type="button" id="reset-board">Reset board</button>
+						</div>
 					</div>
-				</div>
-			</section>
+				</section>
 
-			<hr class="divider" />
+				<hr class="divider" />
 
-			<section>
-				<h2 class="visually-hidden">Board</h2>
+				<section>
+					<h2 class="visually-hidden">Board</h2>
 
-				<div id="board" tabindex="-1">
-					<div class="row">
-						<!-- `autocomplete="off"` prevents setting some random values when restoring a closed page. -->
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 1 cell 1 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 1 cell 2 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 1 cell 3 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 1 cell 4 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 1 cell 5 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 1 cell 6 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 1 cell 7 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 1 cell 8 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 1 cell 9 value"
-							autocomplete="off"
-							class="cell"
-						/>
+					<div id="board" tabindex="-1">
+						<div class="row">
+							<!-- `autocomplete="off"` prevents setting some random values when restoring a closed page. -->
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 1 cell 1 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 1 cell 2 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 1 cell 3 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 1 cell 4 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 1 cell 5 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 1 cell 6 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 1 cell 7 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 1 cell 8 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 1 cell 9 value"
+								autocomplete="off"
+								class="cell"
+							/>
+						</div>
+
+						<div class="row">
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 2 cell 1 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 2 cell 2 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 2 cell 3 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 2 cell 4 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 2 cell 5 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 2 cell 6 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 2 cell 7 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 2 cell 8 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 2 cell 9 value"
+								autocomplete="off"
+								class="cell"
+							/>
+						</div>
+
+						<div class="row">
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 3 cell 1 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 3 cell 2 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 3 cell 3 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 3 cell 4 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 3 cell 5 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 3 cell 6 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 3 cell 7 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 3 cell 8 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 3 cell 9 value"
+								autocomplete="off"
+								class="cell"
+							/>
+						</div>
+
+						<div class="row">
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 4 cell 1 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 4 cell 2 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 4 cell 3 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 4 cell 4 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 4 cell 5 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 4 cell 6 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 4 cell 7 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 4 cell 8 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 4 cell 9 value"
+								autocomplete="off"
+								class="cell"
+							/>
+						</div>
+
+						<div class="row">
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 5 cell 1 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 5 cell 2 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 5 cell 3 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 5 cell 4 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 5 cell 5 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 5 cell 6 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 5 cell 7 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 5 cell 8 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 5 cell 9 value"
+								autocomplete="off"
+								class="cell"
+							/>
+						</div>
+
+						<div class="row">
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 6 cell 1 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 6 cell 2 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 6 cell 3 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 6 cell 4 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 6 cell 5 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 6 cell 6 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 6 cell 7 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 6 cell 8 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 6 cell 9 value"
+								autocomplete="off"
+								class="cell"
+							/>
+						</div>
+
+						<div class="row">
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 7 cell 1 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 7 cell 2 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 7 cell 3 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 7 cell 4 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 7 cell 5 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 7 cell 6 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 7 cell 7 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 7 cell 8 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 7 cell 9 value"
+								autocomplete="off"
+								class="cell"
+							/>
+						</div>
+
+						<div class="row">
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 8 cell 1 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 8 cell 2 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 8 cell 3 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 8 cell 4 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 8 cell 5 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 8 cell 6 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 8 cell 7 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 8 cell 8 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 8 cell 9 value"
+								autocomplete="off"
+								class="cell"
+							/>
+						</div>
+
+						<div class="row">
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 9 cell 1 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 9 cell 2 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 9 cell 3 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 9 cell 4 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 9 cell 5 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 9 cell 6 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 9 cell 7 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 9 cell 8 value"
+								autocomplete="off"
+								class="cell"
+							/>
+							<input
+								type="text"
+								inputmode="numeric"
+								pattern="[1-9]{0,1}"
+								aria-invalid="false"
+								aria-label="Row 9 cell 9 value"
+								autocomplete="off"
+								class="cell"
+							/>
+						</div>
 					</div>
-
-					<div class="row">
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 2 cell 1 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 2 cell 2 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 2 cell 3 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 2 cell 4 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 2 cell 5 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 2 cell 6 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 2 cell 7 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 2 cell 8 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 2 cell 9 value"
-							autocomplete="off"
-							class="cell"
-						/>
-					</div>
-
-					<div class="row">
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 3 cell 1 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 3 cell 2 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 3 cell 3 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 3 cell 4 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 3 cell 5 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 3 cell 6 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 3 cell 7 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 3 cell 8 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 3 cell 9 value"
-							autocomplete="off"
-							class="cell"
-						/>
-					</div>
-
-					<div class="row">
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 4 cell 1 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 4 cell 2 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 4 cell 3 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 4 cell 4 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 4 cell 5 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 4 cell 6 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 4 cell 7 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 4 cell 8 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 4 cell 9 value"
-							autocomplete="off"
-							class="cell"
-						/>
-					</div>
-
-					<div class="row">
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 5 cell 1 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 5 cell 2 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 5 cell 3 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 5 cell 4 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 5 cell 5 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 5 cell 6 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 5 cell 7 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 5 cell 8 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 5 cell 9 value"
-							autocomplete="off"
-							class="cell"
-						/>
-					</div>
-
-					<div class="row">
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 6 cell 1 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 6 cell 2 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 6 cell 3 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 6 cell 4 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 6 cell 5 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 6 cell 6 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 6 cell 7 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 6 cell 8 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 6 cell 9 value"
-							autocomplete="off"
-							class="cell"
-						/>
-					</div>
-
-					<div class="row">
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 7 cell 1 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 7 cell 2 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 7 cell 3 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 7 cell 4 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 7 cell 5 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 7 cell 6 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 7 cell 7 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 7 cell 8 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 7 cell 9 value"
-							autocomplete="off"
-							class="cell"
-						/>
-					</div>
-
-					<div class="row">
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 8 cell 1 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 8 cell 2 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 8 cell 3 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 8 cell 4 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 8 cell 5 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 8 cell 6 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 8 cell 7 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 8 cell 8 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 8 cell 9 value"
-							autocomplete="off"
-							class="cell"
-						/>
-					</div>
-
-					<div class="row">
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 9 cell 1 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 9 cell 2 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 9 cell 3 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 9 cell 4 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 9 cell 5 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 9 cell 6 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 9 cell 7 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 9 cell 8 value"
-							autocomplete="off"
-							class="cell"
-						/>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[1-9]{0,1}"
-							aria-invalid="false"
-							aria-label="Row 9 cell 9 value"
-							autocomplete="off"
-							class="cell"
-						/>
-					</div>
-				</div>
-			</section>
+				</section>
+			</fieldset>
 		</main>
 
 		<script src="./src/main.ts" type="module"></script>

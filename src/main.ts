@@ -1,224 +1,194 @@
 import { getSudoku } from "sudoku-gen";
+import { parse, picklist } from "valibot";
 
-import { CELL_VALUE_EMPTY, CELL_VALUE_PLACEHOLDER, CELL_VALUES, DEFAULT_DIFFICULTY, DIFFICULTY } from "./constants";
-import { type CellInputInfo, type CellValue, type Difficulty } from "./types";
+import { CELL_VALUE_EMPTY, CELL_VALUE_PLACEHOLDER, CELL_VALUES, DEFAULT_DIFFICULTY } from "./constants";
+import {
+	DifficultySchema,
+	isGameStorageEvent,
+	readSavedGame,
+	SAVE_VERSION,
+	type SavedGame,
+	setSavedCell,
+	writeSavedGame,
+} from "./game-storage";
+import { initializePwa } from "./pwa";
+import { type CellInputInfo, type Difficulty } from "./types";
 import { getCellIndicesWithError } from "./utilities/get-cell-indices-with-error";
 
-const getCellValue = (value: string): CellValue | typeof CELL_VALUE_EMPTY => {
-	if (value === CELL_VALUE_EMPTY) {
-		return value;
+const CellInputValueSchema = picklist([...CELL_VALUES, CELL_VALUE_EMPTY]);
+const CELL_INPUT_PATTERN = /^(?<value>[1-9])/u;
+
+const gameFieldset = document.getElementById("game");
+const difficultySelect = document.getElementById("difficulty");
+const generateBoardButton = document.getElementById("generate-board");
+const resetBoardButton = document.getElementById("reset-board");
+
+const hasAllBoardControls =
+	gameFieldset instanceof HTMLFieldSetElement
+	&& difficultySelect instanceof HTMLSelectElement
+	&& generateBoardButton instanceof HTMLButtonElement
+	&& resetBoardButton instanceof HTMLButtonElement;
+
+if (!hasAllBoardControls) {
+	throw new Error("Missing board controls.");
+}
+
+const cellInputs = Array.from(document.querySelectorAll<HTMLInputElement>("input.cell"));
+let storageFailed = false;
+
+const handleStorageError = (error: unknown): void => {
+	storageFailed = true;
+	// Only game prompts are shown in the app; the page-leave confirmation covers the unsaved progress.
+	// oxlint-disable-next-line eslint/no-console
+	console.error("Could not save or restore the game.", error);
+};
+
+const loadSavedGame = (): SavedGame | null => {
+	try {
+		return readSavedGame();
+	} catch (error) {
+		handleStorageError(error);
+
+		return null;
 	}
-
-	const cellValue = CELL_VALUES.find((candidateCellValue) => {
-		return candidateCellValue === value;
-	});
-
-	if (typeof cellValue === "undefined") {
-		throw new Error(`Invalid cell value: ${value}`);
-	}
-
-	return cellValue;
 };
 
-const getDifficultySelectElement = (): HTMLSelectElement => {
-	const selectElement = document.getElementById("difficulty");
+const createGame = (difficulty: Difficulty): SavedGame => {
+	const { puzzle } = getSudoku(difficulty);
 
-	if (!(selectElement instanceof HTMLSelectElement)) {
-		throw new Error("Missing difficulty select element.");
-	}
-
-	return selectElement;
+	return {
+		difficulty,
+		puzzle,
+		values: puzzle,
+		version: SAVE_VERSION,
+	};
 };
 
-const getCellInputElements = (): Array<HTMLInputElement> => {
-	const cellInputs = document.querySelectorAll<HTMLInputElement>("input.cell");
+let game = loadSavedGame() ?? createGame(DEFAULT_DIFFICULTY);
 
-	return Array.from<HTMLInputElement>(cellInputs);
-};
-
-const getSelectedDifficulty = (selectElement: HTMLSelectElement): Difficulty => {
-	const difficulties = Object.values(DIFFICULTY);
-
-	const selectedDifficulty = difficulties.find((difficulty) => {
-		return difficulty === selectElement.value;
-	});
-
-	return selectedDifficulty ?? DEFAULT_DIFFICULTY;
-};
-
-const setFocusToBoardElement = (): void => {
-	const boardElement = document.getElementById("board");
-
-	boardElement?.focus();
-};
-
-const highlightIncorrectCells = (
-	cellInputElements: Array<HTMLInputElement>,
-	cellInputIndicesWithError: Set<number>,
-): void => {
-	cellInputElements.forEach((cellInputElement, index) => {
-		if (cellInputIndicesWithError.has(index)) {
-			cellInputElement.classList.add("highlighted");
-			cellInputElement.ariaInvalid = "true";
-		} else {
-			cellInputElement.classList.remove("highlighted");
-			cellInputElement.ariaInvalid = "false";
-		}
-	});
-};
-
-const isBoardFilledCorrectly = (
-	cellInputsInfo: Array<CellInputInfo>,
-	cellInputIndicesWithError: Set<number>,
-): boolean => {
-	return cellInputsInfo.every((cellInputInfo, index) => {
-		return cellInputInfo.value !== CELL_VALUE_EMPTY && !cellInputIndicesWithError.has(index);
-	});
-};
-
-const generateBoard = (): void => {
-	const selectElement = getDifficultySelectElement();
-
-	const selectedDifficulty = getSelectedDifficulty(selectElement);
-
-	selectElement.value = selectedDifficulty;
-
-	const { puzzle } = getSudoku(selectedDifficulty);
-
-	const cellInputElements = getCellInputElements();
-
-	cellInputElements.forEach((cellInputElement, index) => {
-		const value = puzzle[index];
-
-		if (value === CELL_VALUE_PLACEHOLDER) {
-			cellInputElement.value = CELL_VALUE_EMPTY;
-
-			cellInputElement.readOnly = false;
-
-			return;
-		}
-
-		cellInputElement.value = value;
-
-		cellInputElement.readOnly = true;
-	});
-};
-
-const validateBoard = (): void => {
-	const cellInputElements = getCellInputElements();
-	const cellInputsInfo = cellInputElements.map<CellInputInfo>((cellInput, index) => {
+const getErrors = (): Set<number> => {
+	const cellInputsInfo = Array.from<string, CellInputInfo>(game.values, (value, index) => {
 		return {
 			index,
-			value: getCellValue(cellInput.value),
+			value: parse(CellInputValueSchema, value.replace(CELL_VALUE_PLACEHOLDER, CELL_VALUE_EMPTY)),
 		};
 	});
 
-	const cellInputIndicesWithError = getCellIndicesWithError(cellInputsInfo);
-
-	highlightIncorrectCells(cellInputElements, cellInputIndicesWithError);
-
-	if (
-		isBoardFilledCorrectly(cellInputsInfo, cellInputIndicesWithError) &&
-		window.confirm("You solved the puzzle! Generate another one?")
-	) {
-		generateBoard();
-
-		validateBoard();
-
-		setFocusToBoardElement();
-	}
+	return getCellIndicesWithError(cellInputsInfo);
 };
 
-const handleCellInput = (event: Event): void => {
-	const cellInputElement = event.currentTarget;
-
-	if (!(cellInputElement instanceof HTMLInputElement)) {
-		throw new Error("Cell input event must originate from an input element.");
-	}
-
-	const nextValue = cellInputElement.value;
-	const inputRegexpResult = /^(?<value>[1-9])/u.exec(nextValue);
-	const validValue = inputRegexpResult?.groups?.value ?? CELL_VALUE_EMPTY;
-
-	cellInputElement.value = validValue;
-
-	// Without timeout, the "congratulations" confirmation window appears before a new value is set to the input cell.
-	setTimeout(() => {
-		validateBoard();
-	}, 0);
+const isSolved = (): boolean => {
+	return !game.values.includes(CELL_VALUE_PLACEHOLDER) && getErrors().size === 0;
 };
 
-const getCellInputElementsWithChanges = (): Array<HTMLInputElement> => {
-	const cellInputElements = getCellInputElements();
+const renderGame = (): void => {
+	const errors = getErrors();
 
-	return cellInputElements.filter((cellInputElement) => {
-		return !cellInputElement.readOnly && cellInputElement.value !== CELL_VALUE_EMPTY;
+	difficultySelect.value = game.difficulty;
+
+	cellInputs.forEach((cellInput, index) => {
+		const isInvalid = errors.has(index);
+
+		cellInput.value = game.values[index].replace(CELL_VALUE_PLACEHOLDER, CELL_VALUE_EMPTY);
+		cellInput.readOnly = game.puzzle[index] !== CELL_VALUE_PLACEHOLDER;
+		cellInput.classList.toggle("highlighted", isInvalid);
+		cellInput.ariaInvalid = String(isInvalid);
 	});
 };
 
-const getConfirmationToClearBoard = (cellInputElementsWithChanges: Array<HTMLInputElement>): boolean => {
-	if (cellInputElementsWithChanges.length === 0) {
+const saveGame = (next: SavedGame): void => {
+	game = next;
+
+	renderGame();
+
+	if (storageFailed) {
+		return;
+	}
+
+	try {
+		writeSavedGame(game);
+	} catch (error) {
+		handleStorageError(error);
+	}
+};
+
+const startGame = (next: SavedGame): void => {
+	saveGame(next);
+	document.getElementById("board")?.focus();
+};
+
+const confirmDiscard = (): boolean => {
+	const hasChanges = game.values !== game.puzzle;
+
+	if (!hasChanges) {
 		return true;
 	}
 
 	return window.confirm("Any changes will be lost. Proceed?");
 };
 
-const resetBoard = (): void => {
-	const cellInputElementsWithChanges = getCellInputElementsWithChanges();
-	const canResetBoard = getConfirmationToClearBoard(cellInputElementsWithChanges);
-
-	if (canResetBoard) {
-		cellInputElementsWithChanges.forEach((cellInputElement) => {
-			cellInputElement.value = CELL_VALUE_EMPTY;
-		});
-
-		validateBoard();
-
-		setFocusToBoardElement();
+generateBoardButton.addEventListener("click", () => {
+	if (confirmDiscard()) {
+		startGame(createGame(game.difficulty));
 	}
-};
-
-const generateNewBoard = (): void => {
-	const cellInputElementsWithChanges = getCellInputElementsWithChanges();
-	const canGenerateBoard = getConfirmationToClearBoard(cellInputElementsWithChanges);
-
-	if (canGenerateBoard) {
-		generateBoard();
-
-		validateBoard();
-
-		setFocusToBoardElement();
-	}
-};
-
-const handlePageLeave = (event: BeforeUnloadEvent): void => {
-	const cellInputElementsWithChanges = getCellInputElementsWithChanges();
-
-	const canLeavePage = getConfirmationToClearBoard(cellInputElementsWithChanges);
-
-	if (!canLeavePage) {
-		event.preventDefault();
-	}
-};
-
-const generateBoardButton = document.getElementById("generate-board");
-const resetBoardButton = document.getElementById("reset-board");
-
-if (!(generateBoardButton instanceof HTMLButtonElement) || !(resetBoardButton instanceof HTMLButtonElement)) {
-	throw new Error("Missing board control buttons.");
-}
-
-generateBoardButton.addEventListener("click", generateNewBoard);
-resetBoardButton.addEventListener("click", resetBoard);
-
-getCellInputElements().forEach((cellInputElement) => {
-	cellInputElement.addEventListener("input", handleCellInput);
 });
 
-// Module scripts run after the document has been parsed.
-generateBoard();
+resetBoardButton.addEventListener("click", () => {
+	if (confirmDiscard()) {
+		startGame({
+			...game,
+			values: game.puzzle,
+		});
+	}
+});
 
-validateBoard();
+difficultySelect.addEventListener("change", () => {
+	saveGame({
+		...game,
+		difficulty: parse(DifficultySchema, difficultySelect.value),
+	});
+});
 
-window.addEventListener("beforeunload", handlePageLeave);
+cellInputs.forEach((cellInput, index) => {
+	cellInput.addEventListener("input", () => {
+		const value = CELL_INPUT_PATTERN.exec(cellInput.value)?.groups?.value ?? CELL_VALUE_EMPTY;
+
+		saveGame(setSavedCell(game, index, parse(CellInputValueSchema, value)));
+
+		if (isSolved()) {
+			// Paint the final entry before displaying a blocking confirmation.
+			setTimeout(() => {
+				if (window.confirm("You solved the puzzle! Generate another one?")) {
+					startGame(createGame(game.difficulty));
+				}
+			}, 0);
+		}
+	});
+});
+
+// Writing an unchanged value is a no-op, and a removed save is restored from this tab.
+const syncWithStorage = (): void => {
+	saveGame(loadSavedGame() ?? game);
+};
+
+window.addEventListener("storage", (event) => {
+	if (isGameStorageEvent(event)) {
+		syncWithStorage();
+	}
+});
+window.addEventListener("pageshow", (event) => {
+	if (event.persisted) {
+		syncWithStorage();
+	}
+});
+window.addEventListener("beforeunload", (event) => {
+	if (storageFailed) {
+		event.preventDefault();
+	}
+});
+
+saveGame(game);
+
+gameFieldset.disabled = false;
+
+initializePwa();

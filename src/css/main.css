@@ -44,7 +44,6 @@
 
 	/* TODO: find a better way to make the font size large enough and responsive. */
 	--font-size: calc(var(--cell-size) * var(--font-size-coefficient));
-	--font-size-coefficient: 0.65;
 	--row-border-width-total: calc(6 * var(--border-width-regular) + 4 * var(--border-width-bold));
 
 	aspect-ratio: 1;
@@ -69,7 +68,7 @@
 	}
 
 	&:read-only {
-		background-color: color(from var(--primary-color) srgb r g b / 10%);
+		background-color: color(from var(--primary-color) srgb r g b / var(--read-only-cell-opacity));
 	}
 }
 
