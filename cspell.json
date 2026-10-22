@@ -1,18 +1,7 @@
 {
+	"files": ["**"],
 	"ignorePaths": ["./history", "./LICENSE"],
-	"ignoreWords": [
-		"cantarell",
-		"eperm",
-		"fira",
-		"linejoin",
-		"neue",
-		"nojekyll",
-		"picklist",
-		"roboto",
-		"segoe",
-		"tsgolint",
-		"vite"
-	],
 	"useGitignore": true,
-	"version": "0.2"
+	"version": "0.2",
+	"words": ["cantarell", "eperm", "fira", "linejoin", "neue", "nojekyll", "picklist", "roboto", "segoe", "tsgolint"]
 }
