@@ -4,6 +4,7 @@
 		"oxc.oxc-vscode",
 		"rvben.rumdl",
 		"streetsidesoftware.code-spell-checker",
-		"stylelint.vscode-stylelint"
+		"stylelint.vscode-stylelint",
+		"TypeScriptTeam.native-preview"
 	]
 }

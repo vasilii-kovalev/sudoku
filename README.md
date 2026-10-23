@@ -71,6 +71,7 @@ The workspace recommends these extensions. The same list is in [`.vscode/extensi
 - Oxc
 - rumdl
 - Stylelint
+- TypeScript 7/TypeScript (Native Preview)
 
 ## External resources and inspirations
 
