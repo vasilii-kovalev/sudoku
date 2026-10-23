@@ -9,7 +9,7 @@
 		"icons:generate": "node scripts/generate-icons.ts",
 		"prod:build": "npm run icons:check && tsc -b && vite build",
 		"prod:preview": "vite preview",
-		"prod:publish": "npm run prod:build && gh-pages -d dist --nojekyll",
+		"prod:publish": "npm run prod:build && oneclickpush dist",
 		"format:check": "oxfmt --check",
 		"format:fix": "oxfmt",
 		"lint:css:check": "stylelint \"**/*.css\" --ignore-path .gitignore",
@@ -29,7 +29,7 @@
 		"@types/node": "22.20.5",
 		"cspell": "10.4.0",
 		"cspell-check-unused-words": "1.6.3",
-		"gh-pages": "6.3.0",
+		"oneclickpush": "0.4.1",
 		"oxfmt": "0.73.0",
 		"oxlint": "1.88.0",
 		"oxlint-tsgolint": "7.0.2004",
@@ -41,11 +41,6 @@
 		"typescript": "7.0.2",
 		"vite": "8.3.4",
 		"vite-plugin-pwa": "2.0.0"
-	},
-	"overrides": {
-		"make-dir": {
-			"semver": "6.3.1"
-		}
 	},
 	"devEngines": {
 		"packageManager": {

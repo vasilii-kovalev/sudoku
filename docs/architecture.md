@@ -18,11 +18,11 @@ The move to Vite and TypeScript bundled the modules: the deployed page went from
 
 GitHub Pages is the only deployment target. It keeps hosting beside the source repository, costs nothing for this project, and avoids a dedicated server. The site is a project site under `https://vasilii-kovalev.github.io/sudoku/`.
 
-Publishing is a local step: `prod:publish` builds the site, and the `gh-pages` package pushes `dist/` to the root of the `gh-pages` branch. There is no deployment workflow in the repository. A local step is simpler to maintain and operate, and small commits do not start a deployment on every push. Pages used to serve a `dist/` committed to `main`; a separate branch keeps build output out of the source history.
+Publishing is a local step: `prod:publish` builds the site, and `oneclickpush` pushes `dist/` to the root of the `gh-pages` branch. There is no deployment workflow in the repository. A local step is simpler to maintain and operate, and small commits do not start a deployment on every push. Pages used to serve a `dist/` committed to `main`; a separate branch keeps build output out of the source history. `oneclickpush` replaces `gh-pages`, which has security issues and is unmaintained. The replacement has no dependencies and pushes with Node's built-in APIs and git.
 
 Asset URLs are relative, so the same build works at a domain root and under a project-site prefix. No source file contains a host name or a repository path. The development server still serves that relative layout from `/`.
 
-GitHub Pages runs Jekyll on a published branch unless a `.nojekyll` file is present. Jekyll would treat the generated site as source and omit names that start with `_` or `.`. Publishing passes `--nojekyll` so Pages serves the tree unchanged. That file is added to the published branch, not to `dist/` on `main`.
+GitHub Pages runs Jekyll on a published branch unless a `.nojekyll` file is present. Jekyll would treat the generated site as source and omit names that start with `_` or `.`. `oneclickpush` publishes `dist/` as it stands, including dotfiles. Its CLI has no way to add `.nojekyll` automatically. The empty file is `public/.nojekyll`. Vite copies `public/` into `dist/` unchanged, so the published branch receives that file and Pages serves the tree unchanged.
 
 Pages decides caching on its own. Every file, including content-hashed assets, is served with a ten-minute `Cache-Control: max-age`.
 
