@@ -114,6 +114,8 @@ The production bundle target is Vite's default, not a duplicated `build.target`.
 
 `@/` reaches a file under `src/`, and Vite resolves it from the same TypeScript paths. Files in nested directories, such as utilities and tests, use `@/` because parent-relative imports are forbidden.
 
+A production build also writes a Sonda report of the minified bundle. Sonda reads source maps, so `build.sourcemap` is on and the `.map` files are part of `dist/`. The HTML report is written to `.sonda/` and is not published. The service worker is written after Vite finishes the bundle, so it is not part of that report.
+
 ### Lint and format
 
 Lint and format commands are plain npm scripts without caching. They run rarely enough that caching would not pay off.
