@@ -86,6 +86,8 @@ const renderGame = (): void => {
 
 	difficultySelect.value = game.difficulty;
 
+	// Rendering writes each board input's value and state.
+	/* oxlint-disable eslint/no-param-reassign */
 	cellInputs.forEach((cellInput, index) => {
 		const isInvalid = errors.has(index);
 
@@ -94,6 +96,7 @@ const renderGame = (): void => {
 		cellInput.classList.toggle("highlighted", isInvalid);
 		cellInput.ariaInvalid = String(isInvalid);
 	});
+	/* oxlint-enable eslint/no-param-reassign */
 };
 
 const saveGame = (next: SavedGame): void => {
@@ -124,6 +127,8 @@ const confirmDiscard = (): boolean => {
 		return true;
 	}
 
+	// Discarding entries asks with a native confirm dialog.
+	// oxlint-disable-next-line eslint/no-alert
 	return window.confirm("Any changes will be lost. Proceed?");
 };
 
@@ -158,6 +163,8 @@ cellInputs.forEach((cellInput, index) => {
 		if (isSolved()) {
 			// Paint the final entry before displaying a blocking confirmation.
 			setTimeout(() => {
+				// A solved puzzle asks with a native confirm dialog.
+				// oxlint-disable-next-line eslint/no-alert
 				if (window.confirm("You solved the puzzle! Generate another one?")) {
 					startGame(createGame(game.difficulty));
 				}
